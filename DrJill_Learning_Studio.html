@@ -1020,7 +1020,10 @@ input[type=range]::-webkit-slider-thumb {
 
 <script>
 // ==================== DATA ====================
+const DATA_VERSION = '2';
+
 const SEED_COLLECTIONS = [
+  // ===== ONLINE LEARNING =====
   {
     id: 'anthropic-academy',
     title: 'Anthropic Academy',
@@ -1115,7 +1118,326 @@ const SEED_COLLECTIONS = [
       {id:'ll3', title:'Duolingo', status:'inprogress', progress:40, done:false, url:'https://www.duolingo.com/', app:'Duolingo App'},
       {id:'ll4', title:'Rosetta Stone', status:'notstarted', progress:0, done:false, url:'https://www.rosettastone.com/', app:'Rosetta Stone App'},
     ]
-  }
+  },
+
+  // ===== BOOK COLLECTIONS =====
+  {
+    id: 'books-relationships',
+    title: 'Prescription for Love — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '💕',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Relationships', 'Podcast Prep', 'Marriage'],
+    urls: [],
+    apps: [],
+    notes: 'Reading list for the Prescription for Love podcast.',
+    attachments: [],
+    subcourses: [
+      {id:'pfb1', title:'You Are Not Broken — KJ Casperson, MD', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb2', title:'This Is How Your Marriage Ends — Matthew Fray', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb3', title:'Boundaries in Marriage — Cloud & Townsend', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb4', title:'The Seven Principles for Making Marriage Work — Gottman', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb5', title:'HER. — signed copy', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb6', title:'The Art of Seduction — Robert Greene', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb7', title:'Loving Your Spouse When You Feel Like Walking Away — Gary Chapman', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb8', title:'Essential Labor', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb9', title:'The 4 Agreements — Don Miguel Ruiz', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb10', title:'The Purpose Driven Life — Rick Warren', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb11', title:'The Working Mom Blueprint', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb12', title:'Married for Life', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb13', title:'The Everyday Feminist', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb14', title:'365 Nights of Intimacy', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb15', title:'A to Z of Marriage', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb16', title:'7 Questions Wise Women Ask', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb17', title:'Manual: The Way Men Think', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb18', title:'Marriage Challenges — Williams', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pfb19', title:'Couples Devotional', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-womens-health',
+    title: "Women's Health & Clinical — Reading List",
+    type: 'collection',
+    platform: 'Books',
+    icon: '🩺',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', "Women's Health", 'Clinical', 'Menopause', 'Gynecology'],
+    urls: [],
+    apps: [],
+    notes: 'Clinical reading for patient care improvement.',
+    attachments: [],
+    subcourses: [
+      {id:'whb1', title:'#Hush: Pregnancy-Related Death in the USA — Anne Garrett', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb2', title:'Half the Sky: How to Change the World — Kristof & WuDunn', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb3', title:'The Longevity Nutrient — Dr. Stephanie Venn-Watson', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb4', title:'Estrogen Matters', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb5', title:"Menopause Practice Clinician's Guide", status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb6', title:'You Are Not Broken — KJ Casperson, MD', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb7', title:'Age Healthier Live Happier', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb8', title:'She-Ology & the She-quel', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb9', title:'Come As You Are — Emily Nagoski, PhD', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb10', title:'The Good News About Estrogen', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb11', title:'How To Achieve Healthy Aging (Worldlink)', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb12', title:'The Wisdom of Menopause — Christiane Northrup, MD', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb13', title:'Goddesses Never Age — Christiane Northrup, MD', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb14', title:'The New Rules of Menopause — Mayo Clinic', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb15', title:'The Menopause Solution — Mayo Clinic', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb16', title:'8 Steps To Reverse PCOS', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb17', title:'Boundaries', status:'notstarted', progress:0, done:false, url:''},
+      {id:'whb18', title:'The Ottava Method', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-business',
+    title: 'Business & Self Development — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '💼',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Business', 'Leadership', 'Finance', 'Marketing'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'biz1', title:'Lady Doc Marketing — Lori Werner & Sherry Sbraccia', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz2', title:'Supercommunicators — Charles Duhigg', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz3', title:'Atomic Habits — James Clear', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz4', title:'The Psychology of Money — Morgan Housel', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz5', title:'Profit First — Mike Michalowicz', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz6', title:"LLC Beginner's Guide", status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz7', title:'Financial Literacy for All', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz8', title:'The E Myth Physician', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz9', title:'Building a StoryBrand — Donald Miller', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz10', title:'Dr. Una — Entre MD Books', status:'notstarted', progress:0, done:false, url:''},
+      {id:'biz11', title:'MBA (General)', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-personal-dev',
+    title: 'Personal Development — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '🌱',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Personal Development', 'Mindset', 'Wellness'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'pd1', title:'The Dose Effect — TJ Power', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pd2', title:"It's Okay Not to Look for the Meaning of Life — Jikisai Minami", status:'notstarted', progress:0, done:false, url:''},
+      {id:'pd3', title:'Read This for Inspiration', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pd4', title:'American History in Bite-Sized Chunks', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pd5', title:'So You Want To Talk About Race', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pd6', title:'Love Poems — Pablo Neruda', status:'notstarted', progress:0, done:false, url:''},
+      {id:'pd7', title:"I'm With Fatty", status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-faith',
+    title: 'Faith & Spirituality — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '🙏',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Faith', 'Bible', 'Spirituality', 'Women'],
+    urls: [],
+    apps: ['YouVersion Bible App'],
+    notes: 'Pairs with daily Bible-in-a-Year reading plan on the YouVersion app.',
+    attachments: [],
+    subcourses: [
+      {id:'fa1', title:'The Women of the Bible Speak — Shannon Bream', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-parenting',
+    title: 'Parenting & Motherhood — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '👩‍👧',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Parenting', 'Motherhood', 'Family', 'Children'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'par1', title:'She Calls Me Daddy — Robert Wolgemuth', status:'notstarted', progress:0, done:false, url:''},
+      {id:'par2', title:'Power Moms — Joann S. Lublin', status:'notstarted', progress:0, done:false, url:''},
+      {id:'par3', title:'How We Love Our Kids', status:'notstarted', progress:0, done:false, url:''},
+      {id:'par4', title:"Who's The New Kid", status:'notstarted', progress:0, done:false, url:''},
+      {id:'par5', title:'Yes, Your Kid', status:'notstarted', progress:0, done:false, url:''},
+      {id:'par6', title:'How To Talk So Your Kids Will Listen', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-health-fitness',
+    title: 'Health & Fitness — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '💪',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Health', 'Fitness', 'Longevity', 'Wellness'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'hf1', title:'Outlive — Peter Attia', status:'notstarted', progress:0, done:false, url:''},
+      {id:'hf2', title:'Immune — Philipp Dettmer', status:'notstarted', progress:0, done:false, url:''},
+      {id:'hf3', title:'Deep Fitness', status:'notstarted', progress:0, done:false, url:''},
+      {id:'hf4', title:'Family Fit Plan', status:'notstarted', progress:0, done:false, url:''},
+      {id:'hf5', title:'How to Raise a Mindful Eater', status:'notstarted', progress:0, done:false, url:''},
+      {id:'hf6', title:'Younger Next Year', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-mental-health',
+    title: 'Mental Health — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '🧠',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Mental Health', 'Psychology', 'Support'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'mh1', title:'How Not to Kill Yourself', status:'notstarted', progress:0, done:false, url:''},
+      {id:'mh2', title:'How to Help Family When They Go Through Depression', status:'notstarted', progress:0, done:false, url:''},
+      {id:'mh3', title:'Loving Someone with Suicidal Thoughts', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-fiction',
+    title: 'Fiction & Poetry — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '📖',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Fiction', 'Poetry', 'Literature', 'Fun'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'fic1', title:'Call Us What We Carry — Amanda Gorman', status:'notstarted', progress:0, done:false, url:''},
+      {id:'fic2', title:'The Last Thing He Told Me', status:'notstarted', progress:0, done:false, url:''},
+      {id:'fic3', title:"I'm Judging You", status:'notstarted', progress:0, done:false, url:''},
+      {id:'fic4', title:'The Awkward Black Girl', status:'notstarted', progress:0, done:false, url:''},
+      {id:'fic5', title:"Sh*tty Mom", status:'notstarted', progress:0, done:false, url:''},
+      {id:'fic6', title:'White Girl Problems', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-language',
+    title: 'Language Learning Books — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '🇫🇷',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'French', 'Chinese', 'Language Learning'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'lb1', title:'French Conversation', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb2', title:'2000 Most Common French Words', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb3', title:'Complete French Grammar', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb4', title:'Chinese Books (general)', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb5', title:'Maybe Someday (en français) — Colleen Hoover', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb6', title:'All Your Perfects (en français) — Colleen Hoover', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb7', title:'How To Cheat At French Verbs', status:'notstarted', progress:0, done:false, url:''},
+      {id:'lb8', title:'All the Light We Cannot See (French edition)', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-journals',
+    title: 'Journals & Diaries — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '✍️',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Journals', 'Reflection', 'Family', 'Gratitude'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'jd1', title:'My Quotable Kid', status:'notstarted', progress:0, done:false, url:''},
+      {id:'jd2', title:'One Line A Day', status:'notstarted', progress:0, done:false, url:''},
+      {id:'jd3', title:'Memories From a Mother', status:'notstarted', progress:0, done:false, url:''},
+      {id:'jd4', title:'One Question A Day for You & Me', status:'notstarted', progress:0, done:false, url:''},
+      {id:'jd5', title:'Questions for Couples Journal', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-skin-aesthetics',
+    title: 'Skin & Aesthetics — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '💄',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Aesthetics', 'Skin', 'Dermatology', 'Cosmetic'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'sk1', title:'Skin of Color Textbook', status:'notstarted', progress:0, done:false, url:''},
+      {id:'sk2', title:'Cosmetic Dermatology for Skin of Color', status:'notstarted', progress:0, done:false, url:''},
+      {id:'sk3', title:'Skin Revolution — Dr. Vanita Rattan', status:'notstarted', progress:0, done:false, url:''},
+      {id:'sk4', title:'Vampire Face Lift', status:'notstarted', progress:0, done:false, url:''},
+      {id:'sk5', title:"Aesthetic Procedures: Nurse Practitioner's Guide to Cosmetic Dermatology", status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
+  {
+    id: 'books-modern-transcend',
+    title: 'Modern Transcend Retreat — Reading List',
+    type: 'collection',
+    platform: 'Books',
+    icon: '🏔️',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Books', 'Modern Transcend', 'Retreat', 'Workbooks', 'Women'],
+    urls: [],
+    apps: [],
+    notes: 'Workbooks and resources for Modern Transcend retreat.',
+    attachments: [],
+    subcourses: [
+      {id:'mt1', title:'The Giving List: Women Doing it Differently', status:'notstarted', progress:0, done:false, url:''},
+    ]
+  },
 ];
 
 const SEED_RESOURCES = [
@@ -1149,6 +1471,7 @@ const SEED_RESOURCES = [
   }
 ];
 
+
 // ==================== STATE ====================
 let state = {
   view: 'grid',
@@ -1160,6 +1483,12 @@ let state = {
 };
 
 function loadData() {
+  const storedVersion = localStorage.getItem('drjill_version');
+  if (storedVersion !== DATA_VERSION) {
+    localStorage.removeItem('drjill_collections');
+    localStorage.removeItem('drjill_resources');
+    localStorage.setItem('drjill_version', DATA_VERSION);
+  }
   let collections = JSON.parse(localStorage.getItem('drjill_collections') || 'null');
   let resources = JSON.parse(localStorage.getItem('drjill_resources') || 'null');
   if (!collections) { collections = SEED_COLLECTIONS; saveCollections(collections); }
