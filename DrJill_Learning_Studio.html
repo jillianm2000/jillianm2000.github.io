@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Jill Learning Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf8f5;
+  --blush: #f0ddd8;
+  --blush-mid: #e8c8c0;
+  --blush-deep: #d4a89a;
+  --warm-grey: #8a8480;
+  --warm-grey-light: #c8c4bf;
+  --warm-grey-pale: #f0eeeb;
+  --gold: #c9a84c;
+  --gold-light: #e8d4a0;
+  --gold-pale: #f7f0dc;
+  --teal: #4a9080;
+  --teal-light: #7ab8ac;
+  --text-dark: #2c2825;
+  --text-mid: #5a5450;
+  --text-light: #8a8480;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(44,40,37,0.08);
+  --shadow-md: 0 4px 12px rgba(44,40,37,0.10);
+  --shadow-lg: 0 8px 24px rgba(44,40,37,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER */
+.app-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--blush);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.app-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+}
+.app-logo span { color: var(--blush-deep); }
+.header-search {
+  position: relative;
+}
+.header-search input {
+  width: 280px;
+  padding: 8px 14px 8px 36px;
+  border: 1.5px solid var(--warm-grey-light);
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--warm-grey-pale);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.header-search input:focus {
+  border-color: var(--blush-deep);
+  background: var(--white);
+}
+.header-search input::placeholder { color: var(--warm-grey-light); }
+.search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--warm-grey-light);
+  font-size: 14px;
+  pointer-events: none;
+}
+.header-right { display: flex; align-items: center; gap: 10px; }
+.btn-gmail {
+  background: var(--gold-pale);
+  border: 1.5px solid var(--gold-light);
+  color: var(--gold);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-gmail:hover { background: var(--gold-light); border-color: var(--gold); }
+.btn-add {
+  background: var(--blush-deep);
+  border: none;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-add:hover { background: var(--blush-mid); }
+.view-toggle { display: flex; gap: 2px; background: var(--warm-grey-pale); border-radius: 8px; padding: 3px; }
+.view-btn {
+  background: none;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--warm-grey);
+  transition: all 0.15s;
+}
+.view-btn.active { background: var(--white); color: var(--text-dark); box-shadow: var(--shadow-sm); }
+
+/* SEARCH BANNER */
+.search-banner {
+  background: var(--gold-pale);
+  border-bottom: 1px solid var(--gold-light);
+  padding: 8px 24px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-mid);
+}
+.search-banner.visible { display: flex; }
+.search-banner strong { color: var(--text-dark); }
+.clear-search {
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--gold-light);
+  color: var(--gold);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.clear-search:hover { background: var(--gold-light); }
+
+/* LAYOUT */
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--white);
+  border-right: 1px solid var(--blush);
+  overflow-y: auto;
+  padding: 16px 0;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 2px; }
+.sidebar-section { margin-bottom: 8px; }
+.sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--warm-grey-light);
+  padding: 8px 18px 4px;
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 18px;
+  font-size: 13px;
+  color: var(--text-mid);
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.15s;
+  user-select: none;
+}
+.sidebar-item:hover { background: var(--warm-grey-pale); color: var(--text-dark); }
+.sidebar-item.active { background: var(--blush); color: var(--text-dark); font-weight: 600; }
+.sidebar-item .item-label { display: flex; align-items: center; gap: 8px; }
+.sidebar-item .item-icon { font-size: 14px; width: 18px; text-align: center; }
+.sidebar-badge {
+  font-size: 10px;
+  background: var(--warm-grey-pale);
+  color: var(--warm-grey);
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.sidebar-item.active .sidebar-badge { background: var(--blush-mid); color: var(--text-mid); }
+.sidebar-divider { height: 1px; background: var(--warm-grey-pale); margin: 6px 12px; }
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+.main-content::-webkit-scrollbar { width: 6px; }
+.main-content::-webkit-scrollbar-track { background: transparent; }
+.main-content::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+}
+.section-subtitle { font-size: 13px; color: var(--text-light); margin-top: 2px; }
+
+/* GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+/* CARD */
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--blush);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.card:hover { border-color: var(--blush-mid); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.card.done { opacity: 0.65; }
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.card-title { font-size: 14px; font-weight: 600; color: var(--text-dark); line-height: 1.35; flex: 1; }
+.done-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--warm-grey-light);
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  font-size: 13px;
+  color: transparent;
+}
+.done-btn:hover { border-color: var(--teal); }
+.done-btn.checked { background: var(--teal); border-color: var(--teal); color: white; }
+.card-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.type-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.badge-course { background: var(--blush); color: var(--blush-deep); }
+.badge-webinar { background: var(--gold-pale); color: var(--gold); }
+.badge-collection { background: #e8eef5; color: #5a7a9a; }
+.badge-book { background: #f0ece8; color: #8a6050; }
+.badge-video { background: #eef0e8; color: #607060; }
+.badge-diagram { background: #f0e8f0; color: #805080; }
+.badge-document { background: #e8f0ee; color: #406858; }
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-notstarted { background: var(--warm-grey-light); }
+.dot-inprogress { background: var(--gold); }
+.dot-done { background: var(--teal); }
+.status-label { font-size: 11px; color: var(--text-light); }
+
+/* PROGRESS BAR */
+.progress-wrap { margin-bottom: 10px; }
+.progress-bar-bg {
+  height: 4px;
+  background: var(--warm-grey-pale);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blush-deep), var(--gold));
+  transition: width 0.3s;
+}
+.progress-bar-fill.done-fill { background: var(--teal); }
+.progress-label { font-size: 10px; color: var(--text-light); margin-top: 3px; text-align: right; }
+
+/* ACCESS CHIPS */
+.access-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.access-chip {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--warm-grey-pale);
+  color: var(--text-mid);
+  border: 1px solid var(--warm-grey-light);
+  text-decoration: none;
+  cursor: default;
+}
+.access-chip.link { cursor: pointer; color: var(--blush-deep); border-color: var(--blush-mid); background: var(--blush); }
+.access-chip.link:hover { background: var(--blush-mid); }
+
+/* TAGS */
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: var(--gold-pale);
+  color: var(--gold);
+  border: 1px solid var(--gold-light);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tag:hover { background: var(--gold-light); }
+.tag.active { background: var(--gold); color: white; border-color: var(--gold); }
+
+/* LIST CARD */
+.list-card {
+  background: var(--white);
+  border: 1.5px solid var(--blush);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.list-card:hover { border-color: var(--blush-mid); box-shadow: var(--shadow-sm); }
+.list-card.done { opacity: 0.65; }
+.list-card-info { flex: 1; min-width: 0; }
+.list-card-title { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.list-card-meta { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.list-card-right { display: flex; align-items: center; gap: 10px; }
+.list-progress { width: 80px; }
+
+/* COLLECTION CARD */
+.collection-card {
+  background: var(--white);
+  border: 1.5px solid var(--blush);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.collection-header {
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s;
+}
+.collection-header:hover { background: var(--warm-grey-pale); }
+.collection-header-left { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
+.collection-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.collection-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+.collection-desc { font-size: 12px; color: var(--text-light); }
+.collection-stats { display: flex; align-items: center; gap: 8px; }
+.stat-pill {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: var(--blush);
+  color: var(--blush-deep);
+  font-weight: 500;
+}
+.expand-arrow { color: var(--warm-grey-light); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; margin-left: 8px; }
+.expand-arrow.open { transform: rotate(90deg); }
+.collection-body { display: none; border-top: 1px solid var(--blush); }
+.collection-body.open { display: block; }
+.subcourse-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--warm-grey-pale);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.subcourse-row:last-child { border-bottom: none; }
+.subcourse-row:hover { background: var(--warm-grey-pale); }
+.subcourse-row.done-row { opacity: 0.6; }
+.subcourse-title { flex: 1; font-size: 13px; color: var(--text-dark); font-weight: 400; }
+.subcourse-status { font-size: 11px; color: var(--text-light); min-width: 70px; text-align: right; }
+.subcourse-progress { width: 80px; }
+.mini-bar-bg { height: 3px; background: var(--warm-grey-pale); border-radius: 2px; }
+.mini-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--blush-deep), var(--gold)); }
+.mini-bar-fill.done-fill { background: var(--teal); }
+.subcourse-done-btn {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid var(--warm-grey-light);
+  background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: transparent; flex-shrink: 0;
+  transition: all 0.15s;
+}
+.subcourse-done-btn:hover { border-color: var(--teal); }
+.subcourse-done-btn.checked { background: var(--teal); border-color: var(--teal); color: white; }
+.subcourse-link { font-size: 11px; color: var(--blush-deep); text-decoration: none; cursor: pointer; }
+.subcourse-link:hover { text-decoration: underline; }
+
+/* EMPTY STATE */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-light); }
+.empty-state .emoji { font-size: 40px; margin-bottom: 12px; }
+.empty-state p { font-size: 14px; }
+
+/* GROUP HEADER */
+.group-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--warm-grey);
+  padding: 20px 0 8px;
+  border-bottom: 1px solid var(--warm-grey-pale);
+  margin-bottom: 12px;
+}
+.group-label:first-child { padding-top: 0; }
+
+/* MODAL OVERLAY */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,40,37,0.45);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--blush);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-title { font-size: 17px; font-weight: 700; color: var(--text-dark); }
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--warm-grey);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--text-dark); }
+.modal-body { padding: 20px 24px; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid var(--blush); display: flex; justify-content: flex-end; gap: 10px; }
+
+/* FORM */
+.form-group { margin-bottom: 16px; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--text-mid); margin-bottom: 6px; display: block; }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--warm-grey-light);
+  border-radius: var(--radius-xs);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blush-deep); }
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-hint { font-size: 11px; color: var(--text-light); margin-top: 4px; }
+
+.btn-primary {
+  background: var(--blush-deep);
+  color: white;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--blush-mid); }
+.btn-secondary {
+  background: none;
+  color: var(--text-mid);
+  border: 1.5px solid var(--warm-grey-light);
+  padding: 9px 20px;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--warm-grey); color: var(--text-dark); }
+
+/* DETAIL PANEL */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,40,37,0.35);
+  z-index: 900;
+  display: none;
+}
+.detail-overlay.open { display: block; }
+.detail-panel {
+  position: fixed;
+  right: 0;
+  top: 60px;
+  bottom: 0;
+  width: 420px;
+  background: var(--white);
+  border-left: 1px solid var(--blush);
+  z-index: 901;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-lg);
+}
+.detail-panel.open { transform: translateX(0); }
+.detail-panel::-webkit-scrollbar { width: 4px; }
+.detail-panel::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 2px; }
+.detail-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--blush);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+}
+.detail-close {
+  font-size: 18px;
+  background: none;
+  border: none;
+  color: var(--warm-grey);
+  cursor: pointer;
+  float: right;
+  margin-top: -2px;
+}
+.detail-type-row { margin-bottom: 8px; }
+.detail-title { font-size: 18px; font-weight: 700; color: var(--text-dark); line-height: 1.3; margin-bottom: 12px; }
+.detail-body { padding: 20px; }
+.detail-section { margin-bottom: 20px; }
+.detail-section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); margin-bottom: 8px; }
+
+/* NOTES SECTION */
+.notes-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid var(--warm-grey-light);
+  border-radius: var(--radius-xs);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text-dark);
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--warm-grey-pale);
+}
+.notes-textarea:focus { border-color: var(--blush-deep); background: white; }
+.notes-attachments { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.attach-chip {
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--blush);
+  border: 1px solid var(--blush-mid);
+  border-radius: 10px;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.attach-chip .remove-chip { cursor: pointer; color: var(--warm-grey); font-size: 12px; }
+.attach-chip .remove-chip:hover { color: var(--text-dark); }
+.notes-actions { display: flex; gap: 8px; margin-top: 8px; }
+.notes-action-btn {
+  font-size: 11px;
+  padding: 5px 10px;
+  background: var(--warm-grey-pale);
+  border: 1px solid var(--warm-grey-light);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-mid);
+  transition: all 0.15s;
+}
+.notes-action-btn:hover { background: var(--blush); border-color: var(--blush-mid); color: var(--text-dark); }
+
+/* PROGRESS SLIDER */
+.progress-slider-wrap { display: flex; align-items: center; gap: 10px; }
+input[type=range] {
+  flex: 1;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--warm-grey-pale);
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blush-deep);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.slider-val { font-size: 12px; font-weight: 600; color: var(--text-mid); min-width: 32px; text-align: right; }
+
+/* STATUS SELECT in detail */
+.status-select-wrap { display: flex; gap: 8px; }
+.status-opt {
+  flex: 1;
+  padding: 7px 4px;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--warm-grey-light);
+  background: none;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--text-mid);
+  transition: all 0.15s;
+}
+.status-opt:hover { border-color: var(--blush-mid); }
+.status-opt.sel-ns { border-color: var(--warm-grey-light); background: var(--warm-grey-pale); color: var(--warm-grey); }
+.status-opt.sel-ip { border-color: var(--gold); background: var(--gold-pale); color: var(--gold); }
+.status-opt.sel-done { border-color: var(--teal); background: #e8f5f2; color: var(--teal); }
+
+/* GMAIL MODAL */
+.gmail-modal-icon { font-size: 36px; text-align: center; margin-bottom: 12px; }
+.gmail-step { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+.gmail-step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--blush);
+  color: var(--blush-deep);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.gmail-step-text { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+.gmail-step-text strong { color: var(--text-dark); }
+.gmail-info-box {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-light);
+  border-radius: var(--radius-xs);
+  padding: 12px;
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* BOOKMARKLET SECTION */
+.bookmarklet-box {
+  background: var(--warm-grey-pale);
+  border: 1px dashed var(--warm-grey-light);
+  border-radius: var(--radius-xs);
+  padding: 12px;
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-top: 8px;
+  word-break: break-all;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+/* ARCHIVE SECTION */
+.archive-section { opacity: 0.8; }
+.archive-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  background: #e8f5f2;
+  color: var(--teal);
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+/* MISC */
+.collection-progress-bar { height: 3px; background: var(--warm-grey-pale); border-radius: 2px; overflow: hidden; margin-top: 8px; }
+.collection-progress-fill { height: 100%; background: linear-gradient(90deg, var(--blush-deep), var(--gold)); border-radius: 2px; transition: width 0.3s; }
+
+.no-results { text-align: center; padding: 48px 20px; color: var(--text-light); font-size: 14px; }
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text-dark);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+.help-link { font-size: 12px; color: var(--blush-deep); cursor: pointer; text-decoration: underline; }
+.help-link:hover { color: var(--blush-mid); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-left">
+    <div class="app-logo">Dr. Jill <span>Learning Studio</span></div>
+    <div class="header-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search resources, tags, notes…" oninput="handleSearch(this.value)">
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="btn-gmail" onclick="openGmailModal()">📬 Process Education Inbox</button>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+      <button class="view-btn" id="listBtn" onclick="setView('list')" title="List view">☰</button>
+    </div>
+    <button class="btn-add" onclick="openAddModal()">+ Add Resource</button>
+  </div>
+</header>
+
+<!-- SEARCH BANNER -->
+<div class="search-banner" id="searchBanner">
+  <span>🔍 Showing results for: <strong id="searchTermDisplay"></strong></span>
+  <button class="clear-search" onclick="clearSearch()">✕ Clear</button>
+</div>
+
+<!-- BODY -->
+<div class="app-body">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Status</div>
+      <div class="sidebar-item active" onclick="setFilter('status','all')" id="filter-all">
+        <span class="item-label"><span class="item-icon">📚</span>All Resources</span>
+        <span class="sidebar-badge" id="badge-all">0</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('status','inprogress')" id="filter-inprogress">
+        <span class="item-label"><span class="item-icon">⏳</span>In Progress</span>
+        <span class="sidebar-badge" id="badge-inprogress">0</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('status','notstarted')" id="filter-notstarted">
+        <span class="item-label"><span class="item-icon">○</span>Not Started</span>
+        <span class="sidebar-badge" id="badge-notstarted">0</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('status','archive')" id="filter-archive">
+        <span class="item-label"><span class="item-icon">✅</span>Archive</span>
+        <span class="sidebar-badge" id="badge-archive">0</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Umbrella</div>
+      <div class="sidebar-item" onclick="setFilter('umbrella','online-learning')" id="filter-umbrella-online-learning">
+        <span class="item-label"><span class="item-icon">💻</span>Online Learning</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('umbrella','reading')" id="filter-umbrella-reading">
+        <span class="item-label"><span class="item-icon">📖</span>Reading</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">By Type</div>
+      <div class="sidebar-item" onclick="setFilter('type','collection')" id="filter-type-collection">
+        <span class="item-label"><span class="item-icon">🗂</span>Collections</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','course')" id="filter-type-course">
+        <span class="item-label"><span class="item-icon">🎓</span>Courses</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','webinar')" id="filter-type-webinar">
+        <span class="item-label"><span class="item-icon">🖥</span>Webinars</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','video')" id="filter-type-video">
+        <span class="item-label"><span class="item-icon">▶️</span>Videos</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','book')" id="filter-type-book">
+        <span class="item-label"><span class="item-icon">📗</span>Books</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','diagram')" id="filter-type-diagram">
+        <span class="item-label"><span class="item-icon">🖼</span>Diagrams</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','document')" id="filter-type-document">
+        <span class="item-label"><span class="item-icon">📄</span>Documents</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Topics</div>
+      <div id="tagFilterList"></div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+    <div style="padding: 8px 18px;">
+      <span class="help-link" onclick="openBookmarkletModal()">? Bookmarklet help</span>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main-content" id="mainContent">
+    <div id="contentArea"></div>
+  </main>
+</div>
+
+<!-- DETAIL PANEL OVERLAY -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail()"></div>
+<div class="detail-panel" id="detailPanel">
+  <div class="detail-header">
+    <button class="detail-close" onclick="closeDetail()">✕</button>
+    <div class="detail-type-row" id="detail-type-row"></div>
+    <div class="detail-title" id="detail-title"></div>
+    <div class="access-chips" id="detail-access-chips"></div>
+  </div>
+  <div class="detail-body" id="detail-body"></div>
+</div>
+
+<!-- GMAIL MODAL -->
+<div class="modal-overlay" id="gmailModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📬 Education Inbox Processor</div>
+      <button class="modal-close" onclick="closeModal('gmailModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="gmail-modal-icon">📧</div>
+      <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;">This feature scans your Gmail <strong>*Education</strong> label at <strong>jillian@moderngynalaska.com</strong>, extracts resource details from emails, and adds them to your library.</p>
+      <div class="gmail-step">
+        <div class="gmail-step-num">1</div>
+        <div class="gmail-step-text"><strong>Label emails in Gmail</strong> — When you receive a resource recommendation, conference email, or course enrollment confirmation, apply the <strong>*Education</strong> label in Gmail.</div>
+      </div>
+      <div class="gmail-step">
+        <div class="gmail-step-num">2</div>
+        <div class="gmail-step-text"><strong>Open Claude (Cowork/Dispatch)</strong> — Ask Claude: <em>"Process my Education inbox and add resources to my Learning Studio."</em></div>
+      </div>
+      <div class="gmail-step">
+        <div class="gmail-step-num">3</div>
+        <div class="gmail-step-text"><strong>Claude does the work</strong> — Claude reads the labeled emails, extracts course names, URLs, descriptions, and suggests tags, then adds each resource to your library and archives the emails.</div>
+      </div>
+      <div class="gmail-info-box">
+        💡 <strong>Why not automatic?</strong> Since this is a local HTML app without server access, the Gmail integration runs via Claude's AI tools in a connected session. This keeps your data private and on your device.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('gmailModal')">Got it</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD RESOURCE MODAL -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">+ Add Resource</div>
+      <button class="modal-close" onclick="closeModal('addModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Title *</label>
+        <input class="form-input" id="add-title" placeholder="Resource title" type="text">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Type *</label>
+          <select class="form-select" id="add-type">
+            <option value="course">Course</option>
+            <option value="webinar">Webinar</option>
+            <option value="collection">Collection</option>
+            <option value="book">Book</option>
+            <option value="video">Video</option>
+            <option value="diagram">Diagram / Visual</option>
+            <option value="document">Document</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="add-status">
+            <option value="notstarted">Not Started</option>
+            <option value="inprogress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Platform / Source</label>
+        <input class="form-input" id="add-platform" placeholder="e.g. Coursera, YouTube, etc.">
+      </div>
+      <div class="form-group">
+        <label class="form-label">URL</label>
+        <input class="form-input" id="add-url" placeholder="https://" type="url">
+      </div>
+      <div class="form-group">
+        <label class="form-label">App / Access Method</label>
+        <input class="form-input" id="add-app" placeholder="e.g. iOS App, masterclass.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tags (comma-separated)</label>
+        <input class="form-input" id="add-tags" placeholder="e.g. Menopause, CME, Leadership">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Notes</label>
+        <textarea class="form-textarea" id="add-notes" placeholder="Any notes about this resource…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('addModal')">Cancel</button>
+      <button class="btn-primary" onclick="saveNewResource()">Add to Library</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKMARKLET MODAL -->
+<div class="modal-overlay" id="bookmarkletModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🔖 Bookmarklet</div>
+      <button class="modal-close" onclick="closeModal('bookmarkletModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;">A bookmarklet lets you save any webpage to your Learning Studio with one click while browsing.</p>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;"><strong>How to install:</strong></p>
+      <div class="gmail-step">
+        <div class="gmail-step-num">1</div>
+        <div class="gmail-step-text">Show your browser's bookmarks bar (Cmd+Shift+B in Chrome)</div>
+      </div>
+      <div class="gmail-step">
+        <div class="gmail-step-num">2</div>
+        <div class="gmail-step-text">Drag the link below to your bookmarks bar, or right-click and "Bookmark this link"</div>
+      </div>
+      <div class="gmail-step">
+        <div class="gmail-step-num">3</div>
+        <div class="gmail-step-text">While on any resource page, click the bookmarklet — it will ask for a title and tags, then add it to your Learning Studio</div>
+      </div>
+      <div style="margin-top:14px;">
+        <p style="font-size:12px;color:var(--text-light);margin-bottom:6px;">Drag this to your bookmarks bar:</p>
+        <div style="text-align:center;margin-bottom:10px;">
+          <a href="javascript:(function(){var t=prompt('Resource title:',document.title);if(!t)return;var u=window.location.href;var tags=prompt('Tags (comma-separated):','');if(t){var d=JSON.parse(localStorage.getItem('drjill_resources')||'[]');d.push({id:Date.now()+'',title:t,type:'course',platform:window.location.hostname,status:'notstarted',progress:0,tags:tags?tags.split(',').map(s=>s.trim()):[],urls:[{label:'Website',url:u}],notes:'',attachments:[],done:false});localStorage.setItem('drjill_resources',JSON.stringify(d));alert('Saved to Dr. Jill Learning Studio!');}})()" style="display:inline-block;padding:8px 16px;background:var(--blush-deep);color:white;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;">📚 Save to Learning Studio</a>
+        </div>
+        <div class="bookmarklet-box">javascript:(function(){var t=prompt('Resource title:',document.title);if(!t)return;var u=window.location.href;var tags=prompt('Tags (comma-separated):','');if(t){var d=JSON.parse(localStorage.getItem('drjill_resources')||'[]');d.push({id:Date.now()+'',title:t,type:'course',platform:window.location.hostname,status:'notstarted',progress:0,tags:tags?tags.split(',').map(s=>s.trim()):[],urls:[{label:'Website',url:u}],notes:'',attachments:[],done:false});localStorage.setItem('drjill_resources',JSON.stringify(d));alert('Saved to Dr. Jill Learning Studio!');}})();</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('bookmarkletModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== DATA ====================
+const SEED_COLLECTIONS = [
+  {
+    id: 'anthropic-academy',
+    title: 'Anthropic Academy',
+    type: 'collection',
+    platform: 'Anthropic / Skilljar',
+    icon: '🤖',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['AI', 'Claude', 'Prompt Engineering', 'Machine Learning'],
+    urls: [{label: 'anthropic.skilljar.com', url: 'https://anthropic.skilljar.com/'}],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'aa1', title:'Introduction to Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa2', title:'Prompt Engineering Fundamentals', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa3', title:'Advanced Prompting Techniques', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa4', title:'Building with the Claude API', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa5', title:'Claude for Business Applications', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa6', title:'AI Safety and Responsible Use', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa7', title:'Constitutional AI Overview', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa8', title:'Using Claude for Research', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa9', title:'Claude for Healthcare Professionals', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa10', title:'Multimodal AI with Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa11', title:'Agentic AI and Tool Use', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa12', title:'Claude in the Enterprise', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa13', title:'Ethical AI Practices', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa14', title:'Writing and Editing with Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa15', title:'Data Analysis with Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa16', title:'Claude for Customer Support', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa17', title:'Integrating Claude into Workflows', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa18', title:'Fine-Tuning Prompts for Accuracy', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+      {id:'aa19', title:'Claude API: Advanced Patterns', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
+    ]
+  },
+  {
+    id: 'masterclass',
+    title: 'MasterClass',
+    type: 'collection',
+    platform: 'MasterClass',
+    icon: '🎬',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Leadership', 'Communication', 'Personal Development'],
+    urls: [{label: 'masterclass.com', url: 'https://www.masterclass.com/'}],
+    apps: ['MasterClass App (iOS/Android)'],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'mc1', title:'Feminism', status:'notstarted', progress:0, done:false, url:'https://www.masterclass.com/'},
+      {id:'mc2', title:'Radical Candor', status:'notstarted', progress:0, done:false, url:'https://www.masterclass.com/'},
+      {id:'mc3', title:'Leadership', status:'notstarted', progress:0, done:false, url:'https://www.masterclass.com/'},
+    ]
+  },
+  {
+    id: 'coursera',
+    title: 'Coursera',
+    type: 'collection',
+    platform: 'Coursera',
+    icon: '📘',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Research', 'Evidence-Based Medicine', 'Academic'],
+    urls: [{label: 'coursera.org', url: 'https://www.coursera.org/'}],
+    apps: ['Coursera App (iOS/Android)'],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'co1', title:'How to Read Research', status:'notstarted', progress:0, done:false, url:'https://www.coursera.org/'},
+    ]
+  },
+  {
+    id: 'language-learning',
+    title: 'Language Learning',
+    type: 'collection',
+    platform: 'Various',
+    icon: '🌍',
+    status: 'inprogress',
+    progress: 20,
+    done: false,
+    tags: ['Language', 'Spanish', 'Personal Development'],
+    urls: [],
+    apps: [],
+    notes: '',
+    attachments: [],
+    subcourses: [
+      {id:'ll1', title:'Lingoda', status:'inprogress', progress:30, done:false, url:'https://www.lingoda.com/', app:'Lingoda App'},
+      {id:'ll2', title:'Pimsleur', status:'inprogress', progress:25, done:false, url:'https://www.pimsleur.com/', app:'Pimsleur App'},
+      {id:'ll3', title:'Duolingo', status:'inprogress', progress:40, done:false, url:'https://www.duolingo.com/', app:'Duolingo App'},
+      {id:'ll4', title:'Rosetta Stone', status:'notstarted', progress:0, done:false, url:'https://www.rosettastone.com/', app:'Rosetta Stone App'},
+    ]
+  }
+];
+
+const SEED_RESOURCES = [
+  {
+    id: 'sbh-diagrams',
+    title: 'Science Becomes Her — Editable Skincare Diagrams',
+    type: 'diagram',
+    platform: 'Science Becomes Her / Kajabi',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Aesthetics', 'Skin', 'Marketing', 'Social Media'],
+    urls: [{label: 'sciencebecomesher.mykajabi.com', url: 'https://sciencebecomesher.mykajabi.com/'}],
+    apps: ['Behind login'],
+    notes: '',
+    attachments: []
+  },
+  {
+    id: 'obg-menopause-skin',
+    title: 'OBG Project — Beyond the Surface: Skin in Menopause',
+    type: 'webinar',
+    platform: 'OBG Project',
+    status: 'notstarted',
+    progress: 0,
+    done: false,
+    tags: ['Menopause', 'Aesthetics', 'CME', 'Gynecology'],
+    urls: [{label: 'obgproject.com', url: 'https://www.obgproject.com/2026/05/05/beyond-the-surface-skin-in-menopause/'}],
+    apps: ['Paid access'],
+    notes: '',
+    attachments: []
+  }
+];
+
+// ==================== STATE ====================
+let state = {
+  view: 'grid',
+  filter: {type: 'status', value: 'all'},
+  searchQuery: '',
+  activeTagFilter: null,
+  detailId: null,
+  detailIsCollection: false,
+};
+
+function loadData() {
+  let collections = JSON.parse(localStorage.getItem('drjill_collections') || 'null');
+  let resources = JSON.parse(localStorage.getItem('drjill_resources') || 'null');
+  if (!collections) { collections = SEED_COLLECTIONS; saveCollections(collections); }
+  if (!resources) { resources = SEED_RESOURCES; saveResources(resources); }
+  return { collections, resources };
+}
+function saveCollections(c) { localStorage.setItem('drjill_collections', JSON.stringify(c)); }
+function saveResources(r) { localStorage.setItem('drjill_resources', JSON.stringify(r)); }
+function getData() { return loadData(); }
+
+// ==================== FILTER / SEARCH ====================
+function setFilter(type, value) {
+  state.filter = { type, value };
+  state.activeTagFilter = null;
+  clearSearch(false);
+  updateSidebarActive();
+  render();
+}
+function setTagFilter(tag) {
+  state.activeTagFilter = tag;
+  state.filter = { type: 'tag', value: tag };
+  clearSearch(false);
+  updateSidebarActive();
+  render();
+}
+function handleSearch(val) {
+  state.searchQuery = val.trim().toLowerCase();
+  if (state.searchQuery) {
+    document.getElementById('searchBanner').classList.add('visible');
+    document.getElementById('searchTermDisplay').textContent = '"' + val.trim() + '"';
+  } else {
+    document.getElementById('searchBanner').classList.remove('visible');
+  }
+  render();
+}
+function clearSearch(rerender = true) {
+  state.searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchBanner').classList.remove('visible');
+  if (rerender) render();
+}
+function updateSidebarActive() {
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  const f = state.filter;
+  if (f.type === 'status') {
+    const el = document.getElementById('filter-' + f.value);
+    if (el) el.classList.add('active');
+  } else if (f.type === 'umbrella') {
+    const el = document.getElementById('filter-umbrella-' + f.value);
+    if (el) el.classList.add('active');
+  } else if (f.type === 'type') {
+    const el = document.getElementById('filter-type-' + f.value);
+    if (el) el.classList.add('active');
+  }
+}
+
+function matchesSearch(item, q) {
+  if (!q) return true;
+  const fields = [
+    item.title, item.platform, item.notes,
+    (item.tags || []).join(' '),
+    (item.urls || []).map(u => u.label).join(' '),
+    (item.apps || []).join(' ')
+  ].join(' ').toLowerCase();
+  if (fields.includes(q)) return true;
+  if (item.subcourses) {
+    return item.subcourses.some(sc => sc.title.toLowerCase().includes(q));
+  }
+  return false;
+}
+
+function filterItems(collections, resources) {
+  const f = state.filter;
+  const q = state.searchQuery;
+
+  let filteredC = [...collections];
+  let filteredR = [...resources];
+
+  if (q) {
+    filteredC = filteredC.filter(c => matchesSearch(c, q));
+    filteredR = filteredR.filter(r => matchesSearch(r, q));
+  } else if (f.type === 'status') {
+    if (f.value === 'archive') {
+      filteredC = filteredC.filter(c => c.done);
+      filteredR = filteredR.filter(r => r.done);
+    } else if (f.value === 'inprogress') {
+      filteredC = filteredC.filter(c => !c.done && c.status === 'inprogress');
+      filteredR = filteredR.filter(r => !r.done && r.status === 'inprogress');
+    } else if (f.value === 'notstarted') {
+      filteredC = filteredC.filter(c => !c.done && c.status === 'notstarted');
+      filteredR = filteredR.filter(r => !r.done && r.status === 'notstarted');
+    } else {
+      // all — exclude done
+      filteredC = filteredC.filter(c => !c.done);
+      filteredR = filteredR.filter(r => !r.done);
+    }
+  } else if (f.type === 'umbrella') {
+    if (f.value === 'online-learning') {
+      filteredR = filteredR.filter(r => !r.done && ['course','webinar','video','collection','diagram'].includes(r.type));
+      filteredC = filteredC.filter(c => !c.done);
+    } else if (f.value === 'reading') {
+      filteredC = [];
+      filteredR = filteredR.filter(r => !r.done && ['book','document'].includes(r.type));
+    }
+  } else if (f.type === 'type') {
+    if (f.value === 'collection') {
+      filteredC = filteredC.filter(c => !c.done);
+      filteredR = [];
+    } else {
+      filteredC = [];
+      filteredR = filteredR.filter(r => !r.done && r.type === f.value);
+    }
+  } else if (f.type === 'tag') {
+    const tag = f.value.toLowerCase();
+    filteredC = filteredC.filter(c => !c.done && (c.tags||[]).some(t => t.toLowerCase() === tag));
+    filteredR = filteredR.filter(r => !r.done && (r.tags||[]).some(t => t.toLowerCase() === tag));
+  }
+
+  return { filteredC, filteredR };
+}
+
+// ==================== BADGES ====================
+function updateBadges() {
+  const { collections, resources } = getData();
+  const all = [...collections, ...resources];
+  document.getElementById('badge-all').textContent = all.filter(x => !x.done).length;
+  document.getElementById('badge-inprogress').textContent = all.filter(x => !x.done && x.status === 'inprogress').length;
+  document.getElementById('badge-notstarted').textContent = all.filter(x => !x.done && x.status === 'notstarted').length;
+  document.getElementById('badge-archive').textContent = all.filter(x => x.done).length;
+}
+
+function buildTagList() {
+  const { collections, resources } = getData();
+  const tagSet = new Set();
+  [...collections, ...resources].forEach(item => (item.tags||[]).forEach(t => tagSet.add(t)));
+  const container = document.getElementById('tagFilterList');
+  container.innerHTML = '';
+  [...tagSet].sort().forEach(tag => {
+    const div = document.createElement('div');
+    div.className = 'sidebar-item';
+    div.innerHTML = `<span class="item-label"><span class="item-icon">🏷</span>${tag}</span>`;
+    div.onclick = () => setTagFilter(tag);
+    if (state.filter.type === 'tag' && state.filter.value === tag) div.classList.add('active');
+    container.appendChild(div);
+  });
+}
+
+// ==================== RENDER ====================
+function render() {
+  updateBadges();
+  buildTagList();
+  const { collections, resources } = getData();
+  const { filteredC, filteredR } = filterItems(collections, resources);
+  const isArchive = state.filter.type === 'status' && state.filter.value === 'archive';
+  const container = document.getElementById('contentArea');
+  container.innerHTML = '';
+
+  if (filteredC.length === 0 && filteredR.length === 0) {
+    container.innerHTML = '<div class="no-results">🔍 No resources found.</div>';
+    return;
+  }
+
+  if (isArchive) {
+    const header = document.createElement('div');
+    header.className = 'section-header';
+    header.innerHTML = '<div><div class="section-title">✅ Archive</div><div class="section-subtitle">Completed resources — great work!</div></div>';
+    container.appendChild(header);
+  }
+
+  // Collections
+  if (filteredC.length > 0) {
+    if (!isArchive) {
+      const gl = document.createElement('div');
+      gl.className = 'group-label';
+      gl.textContent = 'Collections';
+      container.appendChild(gl);
+    }
+    filteredC.forEach(c => container.appendChild(renderCollection(c)));
+  }
+
+  // Standalone resources
+  if (filteredR.length > 0) {
+    if (!isArchive) {
+      const gl = document.createElement('div');
+      gl.className = 'group-label';
+      gl.textContent = 'Resources';
+      container.appendChild(gl);
+    }
+    const grid = document.createElement('div');
+    grid.className = state.view === 'grid' ? 'cards-grid' : 'cards-list';
+    filteredR.forEach(r => {
+      if (state.view === 'grid') {
+        grid.appendChild(renderCard(r));
+      } else {
+        grid.appendChild(renderListCard(r));
+      }
+    });
+    container.appendChild(grid);
+  }
+}
+
+function typeBadge(type) {
+  const map = {
+    course: 'badge-course', webinar: 'badge-webinar', collection: 'badge-collection',
+    book: 'badge-book', video: 'badge-video', diagram: 'badge-diagram', document: 'badge-document'
+  };
+  const label = type.charAt(0).toUpperCase() + type.slice(1);
+  return `<span class="type-badge ${map[type]||'badge-course'}">${label}</span>`;
+}
+function statusDot(status) {
+  const cls = status === 'inprogress' ? 'dot-inprogress' : status === 'done' ? 'dot-done' : 'dot-notstarted';
+  const label = status === 'inprogress' ? 'In Progress' : status === 'done' ? 'Done' : 'Not Started';
+  return `<span class="status-dot ${cls}"></span><span class="status-label">${label}</span>`;
+}
+function accessChips(item) {
+  let html = '';
+  (item.urls||[]).forEach(u => {
+    html += `<a class="access-chip link" href="${u.url}" target="_blank" onclick="event.stopPropagation()">${u.label}</a>`;
+  });
+  (item.apps||[]).forEach(a => { html += `<span class="access-chip">${a}</span>`; });
+  return html;
+}
+
+function renderCard(item) {
+  const div = document.createElement('div');
+  div.className = 'card' + (item.done ? ' done' : '');
+  div.onclick = () => openDetail(item.id, false);
+  const prog = item.progress || 0;
+  const isDone = item.done || item.status === 'done';
+  div.innerHTML = `
+    <div class="card-header">
+      <div class="card-title">${item.title}</div>
+      <button class="done-btn ${item.done ? 'checked' : ''}" onclick="event.stopPropagation();toggleDone('${item.id}',false)" title="${item.done ? 'Unmark Done' : 'Mark Done'}">✓</button>
+    </div>
+    <div class="card-meta">
+      ${typeBadge(item.type)}
+      ${statusDot(item.status)}
+    </div>
+    ${item.platform ? `<div style="font-size:11px;color:var(--text-light);margin-bottom:8px;">${item.platform}</div>` : ''}
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill ${isDone?'done-fill':''}" style="width:${prog}%"></div></div>
+      <div class="progress-label">${prog}%</div>
+    </div>
+    <div class="access-chips">${accessChips(item)}</div>
+    <div class="card-tags">${(item.tags||[]).map(t=>`<span class="tag" onclick="event.stopPropagation();setTagFilter('${t}')">${t}</span>`).join('')}</div>
+    ${item.notes ? `<div style="font-size:11px;color:var(--text-light);margin-top:8px;font-style:italic;">${item.notes.substring(0,80)}${item.notes.length>80?'…':''}</div>` : ''}
+  `;
+  return div;
+}
+
+function renderListCard(item) {
+  const div = document.createElement('div');
+  div.className = 'list-card' + (item.done ? ' done' : '');
+  div.onclick = () => openDetail(item.id, false);
+  const prog = item.progress || 0;
+  const isDone = item.done || item.status === 'done';
+  div.innerHTML = `
+    <button class="done-btn ${item.done ? 'checked' : ''}" onclick="event.stopPropagation();toggleDone('${item.id}',false)" title="${item.done ? 'Unmark Done' : 'Mark Done'}">✓</button>
+    <div class="list-card-info">
+      <div class="list-card-title">${item.title}</div>
+      <div class="list-card-meta">${item.platform || ''} ${item.platform&&item.tags&&item.tags.length?'·':''} ${(item.tags||[]).join(', ')}</div>
+    </div>
+    <div class="list-card-right">
+      ${typeBadge(item.type)}
+      <div class="list-progress">
+        <div class="progress-bar-bg"><div class="progress-bar-fill ${isDone?'done-fill':''}" style="width:${prog}%"></div></div>
+        <div class="progress-label">${prog}%</div>
+      </div>
+    </div>
+  `;
+  return div;
+}
+
+function renderCollection(col) {
+  const div = document.createElement('div');
+  div.className = 'collection-card';
+  const subs = col.subcourses || [];
+  const doneCount = subs.filter(s => s.done || s.status === 'done').length;
+  const inProgCount = subs.filter(s => !s.done && s.status === 'inprogress').length;
+  const pct = subs.length > 0 ? Math.round((doneCount / subs.length) * 100) : (col.progress||0);
+  const isOpen = col._expanded || false;
+
+  div.innerHTML = `
+    <div class="collection-header" onclick="toggleCollection('${col.id}',this)">
+      <div class="collection-header-left">
+        <div class="collection-icon">${col.icon||'📚'}</div>
+        <div>
+          <div class="collection-title">${col.title}</div>
+          <div class="collection-desc">${col.platform}${subs.length ? ' · ' + subs.length + ' courses' : ''}</div>
+          <div class="access-chips" style="margin-top:6px;">${accessChips(col)}</div>
+          <div class="collection-progress-bar" style="margin-top:8px;width:160px;">
+            <div class="collection-progress-fill" style="width:${pct}%"></div>
+          </div>
+          <div style="font-size:10px;color:var(--text-light);margin-top:2px;">${doneCount}/${subs.length} completed · ${pct}%</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+        <button class="done-btn ${col.done ? 'checked' : ''}" onclick="event.stopPropagation();toggleDone('${col.id}',true)" title="${col.done ? 'Unmark Done' : 'Mark Done'}">✓</button>
+        <div class="collection-stats">
+          ${inProgCount > 0 ? `<span class="stat-pill">⏳ ${inProgCount} in progress</span>` : ''}
+          ${doneCount > 0 ? `<span class="stat-pill" style="background:#e8f5f2;color:var(--teal);">✓ ${doneCount} done</span>` : ''}
+        </div>
+        <span class="expand-arrow ${isOpen?'open':''}">▶</span>
+      </div>
+    </div>
+    <div class="collection-body ${isOpen?'open':''}" id="col-body-${col.id}">
+      ${subs.map(sc => renderSubcourseRow(col.id, sc)).join('')}
+    </div>
+  `;
+  return div;
+}
+
+function renderSubcourseRow(colId, sc) {
+  const prog = sc.progress || 0;
+  const isDone = sc.done || sc.status === 'done';
+  return `
+    <div class="subcourse-row ${isDone?'done-row':''}" onclick="openSubDetail('${colId}','${sc.id}')">
+      <button class="subcourse-done-btn ${isDone?'checked':''}" onclick="event.stopPropagation();toggleSubDone('${colId}','${sc.id}')" title="Mark done">✓</button>
+      <div class="subcourse-title">${sc.title}</div>
+      <div class="subcourse-progress">
+        <div class="mini-bar-bg"><div class="mini-bar-fill ${isDone?'done-fill':''}" style="width:${prog}%"></div></div>
+        <div style="font-size:10px;color:var(--text-light);text-align:right;margin-top:2px;">${prog}%</div>
+      </div>
+      <div class="subcourse-status">${sc.status==='inprogress'?'⏳ In Progress':sc.status==='done'?'✅ Done':'○ Not Started'}</div>
+      ${sc.url ? `<a class="subcourse-link" href="${sc.url}" target="_blank" onclick="event.stopPropagation()">Open ↗</a>` : ''}
+    </div>
+  `;
+}
+
+// ==================== TOGGLE COLLECTION ====================
+function toggleCollection(colId, headerEl) {
+  const body = document.getElementById('col-body-' + colId);
+  const arrow = headerEl.querySelector('.expand-arrow');
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    arrow.classList.remove('open');
+  } else {
+    body.classList.add('open');
+    arrow.classList.add('open');
+  }
+}
+
+// ==================== DONE TOGGLE ====================
+function toggleDone(id, isCollection) {
+  const { collections, resources } = getData();
+  if (isCollection) {
+    const c = collections.find(x => x.id === id);
+    if (c) { c.done = !c.done; if (c.done) c.status = 'done'; else c.status = 'notstarted'; }
+    saveCollections(collections);
+  } else {
+    const r = resources.find(x => x.id === id);
+    if (r) { r.done = !r.done; if (r.done) { r.status = 'done'; r.progress = 100; } else { r.status = 'notstarted'; r.progress = 0; } }
+    saveResources(resources);
+  }
+  showToast(isCollection ? '✅ Collection updated' : '✅ Resource updated');
+  render();
+}
+
+function toggleSubDone(colId, scId) {
+  const { collections } = getData();
+  const col = collections.find(c => c.id === colId);
+  if (!col) return;
+  const sc = col.subcourses.find(s => s.id === scId);
+  if (!sc) return;
+  sc.done = !sc.done;
+  sc.status = sc.done ? 'done' : 'notstarted';
+  sc.progress = sc.done ? 100 : 0;
+  // update collection overall progress
+  const doneCount = col.subcourses.filter(s => s.done).length;
+  col.progress = col.subcourses.length > 0 ? Math.round((doneCount / col.subcourses.length) * 100) : 0;
+  col.status = col.progress === 100 ? 'done' : col.progress > 0 ? 'inprogress' : 'notstarted';
+  col.done = col.progress === 100;
+  saveCollections(collections);
+  showToast(sc.done ? '✅ Marked done!' : '↩ Unmarked');
+  render();
+}
+
+// ==================== VIEW TOGGLE ====================
+function setView(v) {
+  state.view = v;
+  document.getElementById('gridBtn').classList.toggle('active', v === 'grid');
+  document.getElementById('listBtn').classList.toggle('active', v === 'list');
+  render();
+}
+
+// ==================== DETAIL PANEL ====================
+function openDetail(id, isCollection) {
+  const { collections, resources } = getData();
+  const item = isCollection ? collections.find(c => c.id === id) : resources.find(r => r.id === id);
+  if (!item) return;
+  state.detailId = id;
+  state.detailIsCollection = isCollection;
+
+  document.getElementById('detail-type-row').innerHTML = typeBadge(item.type);
+  document.getElementById('detail-title').textContent = item.title;
+  document.getElementById('detail-access-chips').innerHTML = accessChips(item);
+
+  const body = document.getElementById('detail-body');
+  body.innerHTML = '';
+
+  // Status
+  const statusSec = document.createElement('div');
+  statusSec.className = 'detail-section';
+  const curStat = item.status || 'notstarted';
+  statusSec.innerHTML = `
+    <div class="detail-section-label">Status</div>
+    <div class="status-select-wrap">
+      <button class="status-opt ${curStat==='notstarted'?'sel-ns':''}" onclick="setDetailStatus('${id}',${isCollection},'notstarted')">○ Not Started</button>
+      <button class="status-opt ${curStat==='inprogress'?'sel-ip':''}" onclick="setDetailStatus('${id}',${isCollection},'inprogress')">⏳ In Progress</button>
+      <button class="status-opt ${curStat==='done'?'sel-done':''}" onclick="setDetailStatus('${id}',${isCollection},'done')">✅ Done</button>
+    </div>
+  `;
+  body.appendChild(statusSec);
+
+  // Progress
+  const progSec = document.createElement('div');
+  progSec.className = 'detail-section';
+  const prog = item.progress || 0;
+  progSec.innerHTML = `
+    <div class="detail-section-label">Progress</div>
+    <div class="progress-slider-wrap">
+      <input type="range" min="0" max="100" value="${prog}" id="detail-slider-${id}" oninput="updateDetailProgress('${id}',${isCollection},this.value)">
+      <span class="slider-val" id="slider-val-${id}">${prog}%</span>
+    </div>
+  `;
+  body.appendChild(progSec);
+
+  // Tags
+  if (item.tags && item.tags.length) {
+    const tagSec = document.createElement('div');
+    tagSec.className = 'detail-section';
+    tagSec.innerHTML = `<div class="detail-section-label">Tags</div><div class="card-tags">${item.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
+    body.appendChild(tagSec);
+  }
+
+  // Platform
+  if (item.platform) {
+    const platSec = document.createElement('div');
+    platSec.className = 'detail-section';
+    platSec.innerHTML = `<div class="detail-section-label">Platform</div><div style="font-size:13px;color:var(--text-mid);">${item.platform}</div>`;
+    body.appendChild(platSec);
+  }
+
+  // Notes
+  const notesSec = document.createElement('div');
+  notesSec.className = 'detail-section';
+  notesSec.innerHTML = `
+    <div class="detail-section-label">Notes</div>
+    <textarea class="notes-textarea" id="notes-area-${id}" placeholder="Add your notes here…" onchange="saveNotes('${id}',${isCollection})">${item.notes||''}</textarea>
+    <div class="notes-attachments" id="attach-list-${id}">
+      ${(item.attachments||[]).map((a,i)=>`<div class="attach-chip">${a.type==='link'?'🔗':a.type==='photo'?'🖼':'📎'} ${a.label}<span class="remove-chip" onclick="removeAttachment('${id}',${isCollection},${i})">✕</span></div>`).join('')}
+    </div>
+    <div class="notes-actions">
+      <button class="notes-action-btn" onclick="addLink('${id}',${isCollection})">🔗 Add Link</button>
+      <button class="notes-action-btn" onclick="addPhoto('${id}',${isCollection})">🖼 Attach Photo</button>
+      <button class="notes-action-btn" onclick="addFile('${id}',${isCollection})">📎 Attach File</button>
+    </div>
+  `;
+  body.appendChild(notesSec);
+
+  // Done button
+  const doneSec = document.createElement('div');
+  doneSec.className = 'detail-section';
+  doneSec.innerHTML = `
+    <button style="width:100%;padding:10px;border-radius:var(--radius-sm);border:2px solid ${item.done?'var(--teal)':'var(--warm-grey-light)'};background:${item.done?'#e8f5f2':'none'};color:${item.done?'var(--teal)':'var(--text-mid)'};font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;"
+      onclick="toggleDone('${id}',${isCollection});closeDetail()">
+      ${item.done ? '↩ Unmark as Done' : '✅ Mark as Done & Archive'}
+    </button>
+  `;
+  body.appendChild(doneSec);
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+}
+
+function openSubDetail(colId, scId) {
+  const { collections } = getData();
+  const col = collections.find(c => c.id === colId);
+  if (!col) return;
+  const sc = col.subcourses.find(s => s.id === scId);
+  if (!sc) return;
+
+  document.getElementById('detail-type-row').innerHTML = `<span class="type-badge badge-course">Course</span>`;
+  document.getElementById('detail-title').textContent = sc.title;
+  document.getElementById('detail-access-chips').innerHTML = sc.url ? `<a class="access-chip link" href="${sc.url}" target="_blank">Open Course ↗</a>` : '';
+
+  const body = document.getElementById('detail-body');
+  body.innerHTML = `
+    <div style="font-size:12px;color:var(--text-light);margin-bottom:16px;">Part of: <strong>${col.title}</strong></div>
+  `;
+
+  const statusSec = document.createElement('div');
+  statusSec.className = 'detail-section';
+  const curStat = sc.status || 'notstarted';
+  statusSec.innerHTML = `
+    <div class="detail-section-label">Status</div>
+    <div class="status-select-wrap">
+      <button class="status-opt ${curStat==='notstarted'?'sel-ns':''}" onclick="setSubStatus('${colId}','${scId}','notstarted')">○ Not Started</button>
+      <button class="status-opt ${curStat==='inprogress'?'sel-ip':''}" onclick="setSubStatus('${colId}','${scId}','inprogress')">⏳ In Progress</button>
+      <button class="status-opt ${curStat==='done'?'sel-done':''}" onclick="setSubStatus('${colId}','${scId}','done')">✅ Done</button>
+    </div>
+  `;
+  body.appendChild(statusSec);
+
+  const progSec = document.createElement('div');
+  progSec.className = 'detail-section';
+  progSec.innerHTML = `
+    <div class="detail-section-label">Progress</div>
+    <div class="progress-slider-wrap">
+      <input type="range" min="0" max="100" value="${sc.progress||0}" id="sub-slider-${scId}" oninput="updateSubProgress('${colId}','${scId}',this.value)">
+      <span class="slider-val" id="sub-slider-val-${scId}">${sc.progress||0}%</span>
+    </div>
+  `;
+  body.appendChild(progSec);
+
+  const doneSec = document.createElement('div');
+  doneSec.className = 'detail-section';
+  doneSec.innerHTML = `
+    <button style="width:100%;padding:10px;border-radius:var(--radius-sm);border:2px solid ${sc.done?'var(--teal)':'var(--warm-grey-light)'};background:${sc.done?'#e8f5f2':'none'};color:${sc.done?'var(--teal)':'var(--text-mid)'};font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;"
+      onclick="toggleSubDone('${colId}','${scId}');closeDetail()">
+      ${sc.done ? '↩ Unmark as Done' : '✅ Mark as Done'}
+    </button>
+  `;
+  body.appendChild(doneSec);
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.getElementById('detailPanel').classList.remove('open');
+  state.detailId = null;
+  render();
+}
+
+function setDetailStatus(id, isCollection, status) {
+  const { collections, resources } = getData();
+  const item = isCollection ? collections.find(c=>c.id===id) : resources.find(r=>r.id===id);
+  if (!item) return;
+  item.status = status;
+  if (status === 'done') { item.done = true; item.progress = 100; }
+  else if (status === 'notstarted') { item.done = false; }
+  if (isCollection) saveCollections(collections); else saveResources(resources);
+  openDetail(id, isCollection);
+  render();
+}
+
+function setSubStatus(colId, scId, status) {
+  const { collections } = getData();
+  const col = collections.find(c=>c.id===colId);
+  if (!col) return;
+  const sc = col.subcourses.find(s=>s.id===scId);
+  if (!sc) return;
+  sc.status = status;
+  if (status === 'done') { sc.done = true; sc.progress = 100; }
+  else if (status === 'notstarted') { sc.done = false; sc.progress = 0; }
+  const doneCount = col.subcourses.filter(s=>s.done).length;
+  col.progress = col.subcourses.length > 0 ? Math.round((doneCount / col.subcourses.length) * 100) : 0;
+  col.status = col.progress === 100 ? 'done' : col.progress > 0 ? 'inprogress' : 'notstarted';
+  saveCollections(collections);
+  openSubDetail(colId, scId);
+  render();
+}
+
+function updateDetailProgress(id, isCollection, val) {
+  document.getElementById('slider-val-' + id).textContent = val + '%';
+  const { collections, resources } = getData();
+  const item = isCollection ? collections.find(c=>c.id===id) : resources.find(r=>r.id===id);
+  if (!item) return;
+  item.progress = parseInt(val);
+  if (parseInt(val) === 100) { item.status = 'done'; item.done = true; }
+  else if (parseInt(val) > 0) item.status = 'inprogress';
+  else item.status = 'notstarted';
+  if (isCollection) saveCollections(collections); else saveResources(resources);
+}
+
+function updateSubProgress(colId, scId, val) {
+  document.getElementById('sub-slider-val-' + scId).textContent = val + '%';
+  const { collections } = getData();
+  const col = collections.find(c=>c.id===colId);
+  const sc = col ? col.subcourses.find(s=>s.id===scId) : null;
+  if (!sc) return;
+  sc.progress = parseInt(val);
+  if (parseInt(val) === 100) { sc.status = 'done'; sc.done = true; }
+  else if (parseInt(val) > 0) sc.status = 'inprogress';
+  else sc.status = 'notstarted';
+  const doneCount = col.subcourses.filter(s=>s.done).length;
+  col.progress = col.subcourses.length > 0 ? Math.round((doneCount/col.subcourses.length)*100) : 0;
+  saveCollections(collections);
+}
+
+function saveNotes(id, isCollection) {
+  const val = document.getElementById('notes-area-' + id).value;
+  const { collections, resources } = getData();
+  const item = isCollection ? collections.find(c=>c.id===id) : resources.find(r=>r.id===id);
+  if (!item) return;
+  item.notes = val;
+  if (isCollection) saveCollections(collections); else saveResources(resources);
+}
+
+function addLink(id, isCollection) {
+  const url = prompt('Paste an external link:');
+  if (!url || !url.trim()) return;
+  const label = prompt('Label for this link:', url.replace(/^https?:\/\//, '').split('/')[0]);
+  addAttachment(id, isCollection, { type: 'link', label: label || url, url });
+}
+function addPhoto(id, isCollection) {
+  const label = prompt('Photo description or filename:');
+  if (!label) return;
+  addAttachment(id, isCollection, { type: 'photo', label });
+}
+function addFile(id, isCollection) {
+  const label = prompt('File name (e.g. Summary.pdf):');
+  if (!label) return;
+  addAttachment(id, isCollection, { type: 'file', label });
+}
+function addAttachment(id, isCollection, att) {
+  const { collections, resources } = getData();
+  const item = isCollection ? collections.find(c=>c.id===id) : resources.find(r=>r.id===id);
+  if (!item) return;
+  if (!item.attachments) item.attachments = [];
+  item.attachments.push(att);
+  if (isCollection) saveCollections(collections); else saveResources(resources);
+  // refresh attach list
+  const list = document.getElementById('attach-list-' + id);
+  if (list) list.innerHTML = item.attachments.map((a,i)=>`<div class="attach-chip">${a.type==='link'?'🔗':a.type==='photo'?'🖼':'📎'} ${a.label}<span class="remove-chip" onclick="removeAttachment('${id}',${isCollection},${i})">✕</span></div>`).join('');
+}
+function removeAttachment(id, isCollection, idx) {
+  const { collections, resources } = getData();
+  const item = isCollection ? collections.find(c=>c.id===id) : resources.find(r=>r.id===id);
+  if (!item || !item.attachments) return;
+  item.attachments.splice(idx, 1);
+  if (isCollection) saveCollections(collections); else saveResources(resources);
+  const list = document.getElementById('attach-list-' + id);
+  if (list) list.innerHTML = item.attachments.map((a,i)=>`<div class="attach-chip">${a.type==='link'?'🔗':a.type==='photo'?'🖼':'📎'} ${a.label}<span class="remove-chip" onclick="removeAttachment('${id}',${isCollection},${i})">✕</span></div>`).join('');
+}
+
+// ==================== ADD RESOURCE ====================
+function openAddModal() {
+  document.getElementById('add-title').value = '';
+  document.getElementById('add-platform').value = '';
+  document.getElementById('add-url').value = '';
+  document.getElementById('add-app').value = '';
+  document.getElementById('add-tags').value = '';
+  document.getElementById('add-notes').value = '';
+  document.getElementById('add-type').value = 'course';
+  document.getElementById('add-status').value = 'notstarted';
+  openModal('addModal');
+}
+function saveNewResource() {
+  const title = document.getElementById('add-title').value.trim();
+  if (!title) { alert('Please enter a title.'); return; }
+  const type = document.getElementById('add-type').value;
+  const status = document.getElementById('add-status').value;
+  const platform = document.getElementById('add-platform').value.trim();
+  const url = document.getElementById('add-url').value.trim();
+  const app = document.getElementById('add-app').value.trim();
+  const tagsRaw = document.getElementById('add-tags').value.trim();
+  const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [];
+  const notes = document.getElementById('add-notes').value.trim();
+  const newResource = {
+    id: 'r-' + Date.now(),
+    title, type, platform, status,
+    progress: status === 'done' ? 100 : 0,
+    done: status === 'done',
+    tags,
+    urls: url ? [{label: url.replace(/^https?:\/\//,'').split('/')[0], url}] : [],
+    apps: app ? [app] : [],
+    notes,
+    attachments: []
+  };
+  const { resources } = getData();
+  resources.push(newResource);
+  saveResources(resources);
+  closeModal('addModal');
+  showToast('✅ Resource added!');
+  render();
+}
+
+// ==================== MODALS ====================
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function openGmailModal() { openModal('gmailModal'); }
+function openBookmarkletModal() { openModal('bookmarkletModal'); }
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+});
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ==================== INIT ====================
+render();
+</script>
+</body>
+</html>
