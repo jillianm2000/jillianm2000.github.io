@@ -7,25 +7,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --cream: #faf8f5;
-  --blush: #f0ddd8;
-  --blush-mid: #e8c8c0;
-  --blush-deep: #d4a89a;
-  --warm-grey: #8a8480;
-  --warm-grey-light: #c8c4bf;
-  --warm-grey-pale: #f0eeeb;
-  --gold: #c9a84c;
-  --gold-light: #e8d4a0;
-  --gold-pale: #f7f0dc;
-  --teal: #4a9080;
-  --teal-light: #7ab8ac;
-  --text-dark: #2c2825;
-  --text-mid: #5a5450;
-  --text-light: #8a8480;
+  /* Navy/Teal Design System */
+  --navy: #1b2a4e;
+  --navy-mid: #243560;
+  --cream: #f3f5f9;
+  --blush: #e2ecf5;
+  --blush-mid: #c5d4e4;
+  --blush-deep: #1fa882;
+  --warm-grey: #64748b;
+  --warm-grey-light: #94a3b8;
+  --warm-grey-pale: #f1f5f9;
+  --gold: #1fa882;
+  --gold-light: #4dd8b8;
+  --gold-pale: #e6f9f5;
+  --teal: #2cc9a4;
+  --teal-light: #4dd8b8;
+  --teal-dark: #1a9e83;
+  --amber: #f59e0b;
+  --amber-pale: #fef3c7;
+  --text-dark: #1b2a4e;
+  --text-mid: #4a5568;
+  --text-light: #94a3b8;
   --white: #ffffff;
-  --shadow-sm: 0 1px 3px rgba(44,40,37,0.08);
-  --shadow-md: 0 4px 12px rgba(44,40,37,0.10);
-  --shadow-lg: 0 8px 24px rgba(44,40,37,0.12);
+  --shadow-sm: 0 1px 3px rgba(27,42,78,0.08);
+  --shadow-md: 0 4px 12px rgba(27,42,78,0.10);
+  --shadow-lg: 0 8px 24px rgba(27,42,78,0.14);
   --radius: 12px;
   --radius-sm: 8px;
   --radius-xs: 6px;
@@ -43,8 +49,8 @@ body {
 
 /* HEADER */
 .app-header {
-  background: var(--white);
-  border-bottom: 1px solid var(--blush);
+  background: var(--navy);
+  border-bottom: none;
   padding: 0 24px;
   height: 60px;
   display: flex;
@@ -52,50 +58,52 @@ body {
   justify-content: space-between;
   flex-shrink: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(27,42,78,0.25);
 }
 .header-left { display: flex; align-items: center; gap: 16px; }
 .app-logo {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--white);
   letter-spacing: -0.3px;
+  white-space: nowrap;
 }
-.app-logo span { color: var(--blush-deep); }
+.app-logo .logo-sep { color: rgba(255,255,255,0.35); font-weight: 300; }
+.app-logo span { color: var(--teal); }
 .header-search {
   position: relative;
 }
 .header-search input {
-  width: 280px;
+  width: 260px;
   padding: 8px 14px 8px 36px;
-  border: 1.5px solid var(--warm-grey-light);
+  border: 1.5px solid rgba(255,255,255,0.18);
   border-radius: 20px;
   font-family: inherit;
   font-size: 13px;
-  background: var(--warm-grey-pale);
-  color: var(--text-dark);
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
   outline: none;
   transition: border-color 0.2s, background 0.2s;
 }
 .header-search input:focus {
-  border-color: var(--blush-deep);
-  background: var(--white);
+  border-color: var(--teal);
+  background: rgba(255,255,255,0.15);
 }
-.header-search input::placeholder { color: var(--warm-grey-light); }
+.header-search input::placeholder { color: rgba(255,255,255,0.4); }
 .search-icon {
   position: absolute;
   left: 11px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--warm-grey-light);
+  color: rgba(255,255,255,0.4);
   font-size: 14px;
   pointer-events: none;
 }
 .header-right { display: flex; align-items: center; gap: 10px; }
 .btn-gmail {
-  background: var(--gold-pale);
-  border: 1.5px solid var(--gold-light);
-  color: var(--gold);
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -105,22 +113,22 @@ body {
   transition: all 0.2s;
   white-space: nowrap;
 }
-.btn-gmail:hover { background: var(--gold-light); border-color: var(--gold); }
+.btn-gmail:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); color: var(--white); }
 .btn-add {
-  background: var(--blush-deep);
+  background: var(--teal);
   border: none;
-  color: var(--white);
+  color: var(--navy);
   font-family: inherit;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 7px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
 }
-.btn-add:hover { background: var(--blush-mid); }
-.view-toggle { display: flex; gap: 2px; background: var(--warm-grey-pale); border-radius: 8px; padding: 3px; }
+.btn-add:hover { background: var(--teal-light); }
+.view-toggle { display: flex; gap: 2px; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 3px; }
 .view-btn {
   background: none;
   border: none;
@@ -128,15 +136,15 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  color: var(--warm-grey);
+  color: rgba(255,255,255,0.5);
   transition: all 0.15s;
 }
-.view-btn.active { background: var(--white); color: var(--text-dark); box-shadow: var(--shadow-sm); }
+.view-btn.active { background: var(--teal); color: var(--navy); box-shadow: var(--shadow-sm); font-weight: 700; }
 
 /* SEARCH BANNER */
 .search-banner {
   background: var(--gold-pale);
-  border-bottom: 1px solid var(--gold-light);
+  border-bottom: 1px solid rgba(44,201,164,0.3);
   padding: 8px 24px;
   display: none;
   align-items: center;
@@ -168,7 +176,7 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-  width: 220px;
+  width: 230px;
   flex-shrink: 0;
   background: var(--white);
   border-right: 1px solid var(--blush);
@@ -177,12 +185,12 @@ body {
 }
 .sidebar::-webkit-scrollbar { width: 4px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
-.sidebar::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 2px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--blush-mid); border-radius: 2px; }
 .sidebar-section { margin-bottom: 8px; }
 .sidebar-section-label {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--warm-grey-light);
   padding: 8px 18px 4px;
@@ -196,11 +204,12 @@ body {
   color: var(--text-mid);
   cursor: pointer;
   border-radius: 0;
+  border-left: 3px solid transparent;
   transition: all 0.15s;
   user-select: none;
 }
 .sidebar-item:hover { background: var(--warm-grey-pale); color: var(--text-dark); }
-.sidebar-item.active { background: var(--blush); color: var(--text-dark); font-weight: 600; }
+.sidebar-item.active { background: var(--gold-pale); color: var(--navy); font-weight: 600; border-left-color: var(--teal); }
 .sidebar-item .item-label { display: flex; align-items: center; gap: 8px; }
 .sidebar-item .item-icon { font-size: 14px; width: 18px; text-align: center; }
 .sidebar-badge {
@@ -209,17 +218,47 @@ body {
   color: var(--warm-grey);
   padding: 2px 6px;
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: 600;
 }
-.sidebar-item.active .sidebar-badge { background: var(--blush-mid); color: var(--text-mid); }
-.sidebar-divider { height: 1px; background: var(--warm-grey-pale); margin: 6px 12px; }
+.sidebar-item.active .sidebar-badge { background: var(--teal); color: var(--navy); }
+.sidebar-divider { height: 1px; background: var(--blush); margin: 6px 12px; }
 
 /* MAIN CONTENT */
 .main-content {
   flex: 1;
   overflow-y: auto;
   padding: 24px;
+  background: var(--cream);
 }
+
+/* STAT CARDS */
+.stat-cards-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1.5px solid var(--blush);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+.stat-card-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.stat-card-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+
 .main-content::-webkit-scrollbar { width: 6px; }
 .main-content::-webkit-scrollbar-track { background: transparent; }
 .main-content::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
@@ -292,11 +331,12 @@ body {
   letter-spacing: 0.3px;
   text-transform: uppercase;
 }
-.badge-course { background: var(--blush); color: var(--blush-deep); }
-.badge-webinar { background: var(--gold-pale); color: var(--gold); }
-.badge-collection { background: #e8eef5; color: #5a7a9a; }
-.badge-book { background: #f0ece8; color: #8a6050; }
-.badge-video { background: #eef0e8; color: #607060; }
+.badge-course { background: #e8f0ff; color: #3b5bc9; }
+.badge-webinar { background: var(--gold-pale); color: var(--teal-dark); }
+.badge-collection { background: #f0ebff; color: #6a40b0; }
+.badge-book { background: #fff4e6; color: #c2710a; }
+.badge-video { background: #e8f5e9; color: #2e7d32; }
+.badge-podcast { background: #fce4ec; color: #c2185b; }
 .badge-diagram { background: #f0e8f0; color: #805080; }
 .badge-document { background: #e8f0ee; color: #406858; }
 .status-dot {
@@ -321,7 +361,7 @@ body {
 .progress-bar-fill {
   height: 100%;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--blush-deep), var(--gold));
+  background: linear-gradient(90deg, var(--teal-dark), var(--teal-light));
   transition: width 0.3s;
 }
 .progress-bar-fill.done-fill { background: var(--teal); }
@@ -427,7 +467,7 @@ body {
 .subcourse-status { font-size: 11px; color: var(--text-light); min-width: 70px; text-align: right; }
 .subcourse-progress { width: 80px; }
 .mini-bar-bg { height: 3px; background: var(--warm-grey-pale); border-radius: 2px; }
-.mini-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--blush-deep), var(--gold)); }
+.mini-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--teal-dark), var(--teal-light)); }
 .mini-bar-fill.done-fill { background: var(--teal); }
 .subcourse-done-btn {
   width: 22px; height: 22px; border-radius: 50%;
@@ -523,8 +563,8 @@ body {
 .form-hint { font-size: 11px; color: var(--text-light); margin-top: 4px; }
 
 .btn-primary {
-  background: var(--blush-deep);
-  color: white;
+  background: var(--teal);
+  color: var(--navy);
   border: none;
   padding: 9px 20px;
   border-radius: 20px;
@@ -534,7 +574,7 @@ body {
   cursor: pointer;
   transition: background 0.2s;
 }
-.btn-primary:hover { background: var(--blush-mid); }
+.btn-primary:hover { background: var(--teal-light); }
 .btn-secondary {
   background: none;
   color: var(--text-mid);
@@ -740,7 +780,7 @@ input[type=range]::-webkit-slider-thumb {
 
 /* MISC */
 .collection-progress-bar { height: 3px; background: var(--warm-grey-pale); border-radius: 2px; overflow: hidden; margin-top: 8px; }
-.collection-progress-fill { height: 100%; background: linear-gradient(90deg, var(--blush-deep), var(--gold)); border-radius: 2px; transition: width 0.3s; }
+.collection-progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal-dark), var(--teal-light)); border-radius: 2px; transition: width 0.3s; }
 
 .no-results { text-align: center; padding: 48px 20px; color: var(--text-light); font-size: 14px; }
 .toast {
@@ -769,7 +809,7 @@ input[type=range]::-webkit-slider-thumb {
 <!-- HEADER -->
 <header class="app-header">
   <div class="header-left">
-    <div class="app-logo">Dr. Jill <span>Learning Studio</span></div>
+    <div class="app-logo">Dr. Jill <span class="logo-sep"> | </span>Learning Studio</div>
     <div class="header-search">
       <span class="search-icon">🔍</span>
       <input type="text" id="searchInput" placeholder="Search resources, tags, notes…" oninput="handleSearch(this.value)">
@@ -810,7 +850,7 @@ input[type=range]::-webkit-slider-thumb {
         <span class="sidebar-badge" id="badge-notstarted">0</span>
       </div>
       <div class="sidebar-item" onclick="setFilter('status','archive')" id="filter-archive">
-        <span class="item-label"><span class="item-icon">✅</span>Archive</span>
+        <span class="item-label"><span class="item-icon">✅</span>Archive (Done)</span>
         <span class="sidebar-badge" id="badge-archive">0</span>
       </div>
     </div>
@@ -818,12 +858,15 @@ input[type=range]::-webkit-slider-thumb {
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-section-label">Umbrella</div>
+      <div class="sidebar-section-label">Umbrella Categories</div>
       <div class="sidebar-item" onclick="setFilter('umbrella','online-learning')" id="filter-umbrella-online-learning">
         <span class="item-label"><span class="item-icon">💻</span>Online Learning</span>
       </div>
       <div class="sidebar-item" onclick="setFilter('umbrella','reading')" id="filter-umbrella-reading">
         <span class="item-label"><span class="item-icon">📖</span>Reading</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('umbrella','collections')" id="filter-umbrella-collections">
+        <span class="item-label"><span class="item-icon">🗂</span>Collections</span>
       </div>
     </div>
 
@@ -831,26 +874,29 @@ input[type=range]::-webkit-slider-thumb {
 
     <div class="sidebar-section">
       <div class="sidebar-section-label">By Type</div>
-      <div class="sidebar-item" onclick="setFilter('type','collection')" id="filter-type-collection">
-        <span class="item-label"><span class="item-icon">🗂</span>Collections</span>
-      </div>
       <div class="sidebar-item" onclick="setFilter('type','course')" id="filter-type-course">
         <span class="item-label"><span class="item-icon">🎓</span>Courses</span>
       </div>
       <div class="sidebar-item" onclick="setFilter('type','webinar')" id="filter-type-webinar">
         <span class="item-label"><span class="item-icon">🖥</span>Webinars</span>
       </div>
-      <div class="sidebar-item" onclick="setFilter('type','video')" id="filter-type-video">
-        <span class="item-label"><span class="item-icon">▶️</span>Videos</span>
-      </div>
       <div class="sidebar-item" onclick="setFilter('type','book')" id="filter-type-book">
         <span class="item-label"><span class="item-icon">📗</span>Books</span>
       </div>
-      <div class="sidebar-item" onclick="setFilter('type','diagram')" id="filter-type-diagram">
-        <span class="item-label"><span class="item-icon">🖼</span>Diagrams</span>
+      <div class="sidebar-item" onclick="setFilter('type','video')" id="filter-type-video">
+        <span class="item-label"><span class="item-icon">▶️</span>Videos</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','podcast')" id="filter-type-podcast">
+        <span class="item-label"><span class="item-icon">🎙</span>Podcasts</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','website')" id="filter-type-website">
+        <span class="item-label"><span class="item-icon">🌐</span>Websites</span>
       </div>
       <div class="sidebar-item" onclick="setFilter('type','document')" id="filter-type-document">
         <span class="item-label"><span class="item-icon">📄</span>Documents</span>
+      </div>
+      <div class="sidebar-item" onclick="setFilter('type','diagram')" id="filter-type-diagram">
+        <span class="item-label"><span class="item-icon">🖼</span>Diagrams</span>
       </div>
     </div>
 
@@ -869,6 +915,13 @@ input[type=range]::-webkit-slider-thumb {
 
   <!-- MAIN -->
   <main class="main-content" id="mainContent">
+    <!-- STAT CARDS (Learning Studio only) -->
+    <div class="stat-cards-row" id="statCardsRow">
+      <div class="stat-card"><div class="stat-card-num" id="stat-active">0</div><div class="stat-card-label">Active Resources</div></div>
+      <div class="stat-card"><div class="stat-card-num" id="stat-inprogress">0</div><div class="stat-card-label">In Progress</div></div>
+      <div class="stat-card"><div class="stat-card-num" id="stat-done">0</div><div class="stat-card-label">Archived (Done)</div></div>
+      <div class="stat-card"><div class="stat-card-num" id="stat-pct">0%</div><div class="stat-card-label">Completion Rate</div></div>
+    </div>
     <div id="contentArea"></div>
   </main>
 </div>
@@ -1020,457 +1073,249 @@ input[type=range]::-webkit-slider-thumb {
 
 <script>
 // ==================== DATA ====================
-const DATA_VERSION = '2';
+const DATA_VERSION = '3';
 
 const SEED_COLLECTIONS = [
-  // ===== ONLINE LEARNING =====
-  {
-    id: 'anthropic-academy',
-    title: 'Anthropic Academy',
-    type: 'collection',
-    platform: 'Anthropic / Skilljar',
-    icon: '🤖',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['AI', 'Claude', 'Prompt Engineering', 'Machine Learning'],
-    urls: [{label: 'anthropic.skilljar.com', url: 'https://anthropic.skilljar.com/'}],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'aa1', title:'Introduction to Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa2', title:'Prompt Engineering Fundamentals', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa3', title:'Advanced Prompting Techniques', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa4', title:'Building with the Claude API', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa5', title:'Claude for Business Applications', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa6', title:'AI Safety and Responsible Use', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa7', title:'Constitutional AI Overview', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa8', title:'Using Claude for Research', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa9', title:'Claude for Healthcare Professionals', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa10', title:'Multimodal AI with Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa11', title:'Agentic AI and Tool Use', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa12', title:'Claude in the Enterprise', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa13', title:'Ethical AI Practices', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa14', title:'Writing and Editing with Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa15', title:'Data Analysis with Claude', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa16', title:'Claude for Customer Support', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa17', title:'Integrating Claude into Workflows', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa18', title:'Fine-Tuning Prompts for Accuracy', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-      {id:'aa19', title:'Claude API: Advanced Patterns', status:'notstarted', progress:0, done:false, url:'https://anthropic.skilljar.com/'},
-    ]
-  },
-  {
-    id: 'masterclass',
-    title: 'MasterClass',
-    type: 'collection',
-    platform: 'MasterClass',
-    icon: '🎬',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Leadership', 'Communication', 'Personal Development'],
-    urls: [{label: 'masterclass.com', url: 'https://www.masterclass.com/'}],
-    apps: ['MasterClass App (iOS/Android)'],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'mc1', title:'Feminism', status:'notstarted', progress:0, done:false, url:'https://www.masterclass.com/'},
-      {id:'mc2', title:'Radical Candor', status:'notstarted', progress:0, done:false, url:'https://www.masterclass.com/'},
-      {id:'mc3', title:'Leadership', status:'notstarted', progress:0, done:false, url:'https://www.masterclass.com/'},
-    ]
-  },
   {
     id: 'coursera',
-    title: 'Coursera',
-    type: 'collection',
+    title: 'Coursera Courses',
+    icon: '🎓',
     platform: 'Coursera',
-    icon: '📘',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Research', 'Evidence-Based Medicine', 'Academic'],
-    urls: [{label: 'coursera.org', url: 'https://www.coursera.org/'}],
-    apps: ['Coursera App (iOS/Android)'],
+    status: 'notstarted', progress: 0, done: false,
+    tags: ['Business','Language','Science','Marketing'],
+    urls: [{label: 'coursera.org', url: 'https://www.coursera.org'}],
+    apps: ['coursera.org / iOS App'],
     notes: '',
     attachments: [],
     subcourses: [
-      {id:'co1', title:'How to Read Research', status:'notstarted', progress:0, done:false, url:'https://www.coursera.org/'},
+      {id:'c1', title:'Viral Marketing and How to Craft Contagious Content', status:'notstarted', progress:0, done:false},
+      {id:'c2', title:'Cosmetic Formulation Science', status:'notstarted', progress:0, done:false},
+      {id:'c3', title:'The Science of Well-Being — Yale University', status:'notstarted', progress:0, done:false},
+      {id:'c4', title:'Dermatology: Trip to the Skin', status:'notstarted', progress:0, done:false},
+      {id:'c5', title:'Introduction to Marketing — Wharton', status:'notstarted', progress:0, done:false},
+      {id:'c6', title:'The Strategy of Content Marketing — UC Davis', status:'notstarted', progress:0, done:false},
+      {id:'c7', title:'Learning How to Learn', status:'notstarted', progress:0, done:false},
+      {id:'c8', title:'A Life of Happiness and Fulfillment', status:'notstarted', progress:0, done:false},
+      {id:'c9', title:'Chinese for Beginners — Peking University (Part 1)', status:'notstarted', progress:0, done:false},
+      {id:'c10', title:'Chinese for Beginners — Peking University (Part 2)', status:'notstarted', progress:0, done:false},
+      {id:'c11', title:'Chinese for Beginners — Peking University (Part 3)', status:'notstarted', progress:0, done:false},
+      {id:'c12', title:'Entrepreneurship: Launching an Innovative Business', status:'notstarted', progress:0, done:false},
+      {id:'c13', title:'Healthcare Innovation and Entrepreneurship', status:'notstarted', progress:0, done:false},
+      {id:'c14', title:'Nutrition and Health: Food Risks', status:'notstarted', progress:0, done:false},
+      {id:'c15', title:'Introduction to Psychology', status:'notstarted', progress:0, done:false},
+      {id:'c16', title:'Business Writing', status:'notstarted', progress:0, done:false},
+      {id:'c17', title:'Digital Marketing Fundamentals', status:'notstarted', progress:0, done:false},
+      {id:'c18', title:'Leadership Principles — HBS Online', status:'notstarted', progress:0, done:false},
+      {id:'c19', title:'Positive Psychology — UPenn', status:'notstarted', progress:0, done:false}
     ]
-  },
-  {
-    id: 'language-learning',
-    title: 'Language Learning',
-    type: 'collection',
-    platform: 'Various',
-    icon: '🌍',
-    status: 'inprogress',
-    progress: 20,
-    done: false,
-    tags: ['Language', 'Spanish', 'Personal Development'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'ll1', title:'Lingoda', status:'inprogress', progress:30, done:false, url:'https://www.lingoda.com/', app:'Lingoda App'},
-      {id:'ll2', title:'Pimsleur', status:'inprogress', progress:25, done:false, url:'https://www.pimsleur.com/', app:'Pimsleur App'},
-      {id:'ll3', title:'Duolingo', status:'inprogress', progress:40, done:false, url:'https://www.duolingo.com/', app:'Duolingo App'},
-      {id:'ll4', title:'Rosetta Stone', status:'notstarted', progress:0, done:false, url:'https://www.rosettastone.com/', app:'Rosetta Stone App'},
-    ]
-  },
-
-  // ===== BOOK COLLECTIONS =====
-  {
-    id: 'books-relationships',
-    title: 'Prescription for Love — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '💕',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Relationships', 'Podcast Prep', 'Marriage'],
-    urls: [],
-    apps: [],
-    notes: 'Reading list for the Prescription for Love podcast.',
-    attachments: [],
-    subcourses: [
-      {id:'pfb1', title:'You Are Not Broken — KJ Casperson, MD', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb2', title:'This Is How Your Marriage Ends — Matthew Fray', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb3', title:'Boundaries in Marriage — Cloud & Townsend', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb4', title:'The Seven Principles for Making Marriage Work — Gottman', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb5', title:'HER. — signed copy', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb6', title:'The Art of Seduction — Robert Greene', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb7', title:'Loving Your Spouse When You Feel Like Walking Away — Gary Chapman', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb8', title:'Essential Labor', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb9', title:'The 4 Agreements — Don Miguel Ruiz', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb10', title:'The Purpose Driven Life — Rick Warren', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb11', title:'The Working Mom Blueprint', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb12', title:'Married for Life', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb13', title:'The Everyday Feminist', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb14', title:'365 Nights of Intimacy', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb15', title:'A to Z of Marriage', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb16', title:'7 Questions Wise Women Ask', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb17', title:'Manual: The Way Men Think', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb18', title:'Marriage Challenges — Williams', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pfb19', title:'Couples Devotional', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-womens-health',
-    title: "Women's Health & Clinical — Reading List",
-    type: 'collection',
-    platform: 'Books',
-    icon: '🩺',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', "Women's Health", 'Clinical', 'Menopause', 'Gynecology'],
-    urls: [],
-    apps: [],
-    notes: 'Clinical reading for patient care improvement.',
-    attachments: [],
-    subcourses: [
-      {id:'whb1', title:'#Hush: Pregnancy-Related Death in the USA — Anne Garrett', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb2', title:'Half the Sky: How to Change the World — Kristof & WuDunn', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb3', title:'The Longevity Nutrient — Dr. Stephanie Venn-Watson', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb4', title:'Estrogen Matters', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb5', title:"Menopause Practice Clinician's Guide", status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb6', title:'You Are Not Broken — KJ Casperson, MD', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb7', title:'Age Healthier Live Happier', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb8', title:'She-Ology & the She-quel', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb9', title:'Come As You Are — Emily Nagoski, PhD', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb10', title:'The Good News About Estrogen', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb11', title:'How To Achieve Healthy Aging (Worldlink)', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb12', title:'The Wisdom of Menopause — Christiane Northrup, MD', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb13', title:'Goddesses Never Age — Christiane Northrup, MD', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb14', title:'The New Rules of Menopause — Mayo Clinic', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb15', title:'The Menopause Solution — Mayo Clinic', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb16', title:'8 Steps To Reverse PCOS', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb17', title:'Boundaries', status:'notstarted', progress:0, done:false, url:''},
-      {id:'whb18', title:'The Ottava Method', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-business',
-    title: 'Business & Self Development — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '💼',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Business', 'Leadership', 'Finance', 'Marketing'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'biz1', title:'Lady Doc Marketing — Lori Werner & Sherry Sbraccia', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz2', title:'Supercommunicators — Charles Duhigg', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz3', title:'Atomic Habits — James Clear', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz4', title:'The Psychology of Money — Morgan Housel', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz5', title:'Profit First — Mike Michalowicz', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz6', title:"LLC Beginner's Guide", status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz7', title:'Financial Literacy for All', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz8', title:'The E Myth Physician', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz9', title:'Building a StoryBrand — Donald Miller', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz10', title:'Dr. Una — Entre MD Books', status:'notstarted', progress:0, done:false, url:''},
-      {id:'biz11', title:'MBA (General)', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-personal-dev',
-    title: 'Personal Development — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '🌱',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Personal Development', 'Mindset', 'Wellness'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'pd1', title:'The Dose Effect — TJ Power', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pd2', title:"It's Okay Not to Look for the Meaning of Life — Jikisai Minami", status:'notstarted', progress:0, done:false, url:''},
-      {id:'pd3', title:'Read This for Inspiration', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pd4', title:'American History in Bite-Sized Chunks', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pd5', title:'So You Want To Talk About Race', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pd6', title:'Love Poems — Pablo Neruda', status:'notstarted', progress:0, done:false, url:''},
-      {id:'pd7', title:"I'm With Fatty", status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-faith',
-    title: 'Faith & Spirituality — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '🙏',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Faith', 'Bible', 'Spirituality', 'Women'],
-    urls: [],
-    apps: ['YouVersion Bible App'],
-    notes: 'Pairs with daily Bible-in-a-Year reading plan on the YouVersion app.',
-    attachments: [],
-    subcourses: [
-      {id:'fa1', title:'The Women of the Bible Speak — Shannon Bream', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-parenting',
-    title: 'Parenting & Motherhood — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '👩‍👧',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Parenting', 'Motherhood', 'Family', 'Children'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'par1', title:'She Calls Me Daddy — Robert Wolgemuth', status:'notstarted', progress:0, done:false, url:''},
-      {id:'par2', title:'Power Moms — Joann S. Lublin', status:'notstarted', progress:0, done:false, url:''},
-      {id:'par3', title:'How We Love Our Kids', status:'notstarted', progress:0, done:false, url:''},
-      {id:'par4', title:"Who's The New Kid", status:'notstarted', progress:0, done:false, url:''},
-      {id:'par5', title:'Yes, Your Kid', status:'notstarted', progress:0, done:false, url:''},
-      {id:'par6', title:'How To Talk So Your Kids Will Listen', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-health-fitness',
-    title: 'Health & Fitness — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '💪',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Health', 'Fitness', 'Longevity', 'Wellness'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'hf1', title:'Outlive — Peter Attia', status:'notstarted', progress:0, done:false, url:''},
-      {id:'hf2', title:'Immune — Philipp Dettmer', status:'notstarted', progress:0, done:false, url:''},
-      {id:'hf3', title:'Deep Fitness', status:'notstarted', progress:0, done:false, url:''},
-      {id:'hf4', title:'Family Fit Plan', status:'notstarted', progress:0, done:false, url:''},
-      {id:'hf5', title:'How to Raise a Mindful Eater', status:'notstarted', progress:0, done:false, url:''},
-      {id:'hf6', title:'Younger Next Year', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-mental-health',
-    title: 'Mental Health — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '🧠',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Mental Health', 'Psychology', 'Support'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'mh1', title:'How Not to Kill Yourself', status:'notstarted', progress:0, done:false, url:''},
-      {id:'mh2', title:'How to Help Family When They Go Through Depression', status:'notstarted', progress:0, done:false, url:''},
-      {id:'mh3', title:'Loving Someone with Suicidal Thoughts', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-fiction',
-    title: 'Fiction & Poetry — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '📖',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Fiction', 'Poetry', 'Literature', 'Fun'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'fic1', title:'Call Us What We Carry — Amanda Gorman', status:'notstarted', progress:0, done:false, url:''},
-      {id:'fic2', title:'The Last Thing He Told Me', status:'notstarted', progress:0, done:false, url:''},
-      {id:'fic3', title:"I'm Judging You", status:'notstarted', progress:0, done:false, url:''},
-      {id:'fic4', title:'The Awkward Black Girl', status:'notstarted', progress:0, done:false, url:''},
-      {id:'fic5', title:"Sh*tty Mom", status:'notstarted', progress:0, done:false, url:''},
-      {id:'fic6', title:'White Girl Problems', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-language',
-    title: 'Language Learning Books — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '🇫🇷',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'French', 'Chinese', 'Language Learning'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'lb1', title:'French Conversation', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb2', title:'2000 Most Common French Words', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb3', title:'Complete French Grammar', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb4', title:'Chinese Books (general)', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb5', title:'Maybe Someday (en français) — Colleen Hoover', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb6', title:'All Your Perfects (en français) — Colleen Hoover', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb7', title:'How To Cheat At French Verbs', status:'notstarted', progress:0, done:false, url:''},
-      {id:'lb8', title:'All the Light We Cannot See (French edition)', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-journals',
-    title: 'Journals & Diaries — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '✍️',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Journals', 'Reflection', 'Family', 'Gratitude'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'jd1', title:'My Quotable Kid', status:'notstarted', progress:0, done:false, url:''},
-      {id:'jd2', title:'One Line A Day', status:'notstarted', progress:0, done:false, url:''},
-      {id:'jd3', title:'Memories From a Mother', status:'notstarted', progress:0, done:false, url:''},
-      {id:'jd4', title:'One Question A Day for You & Me', status:'notstarted', progress:0, done:false, url:''},
-      {id:'jd5', title:'Questions for Couples Journal', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-skin-aesthetics',
-    title: 'Skin & Aesthetics — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '💄',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Aesthetics', 'Skin', 'Dermatology', 'Cosmetic'],
-    urls: [],
-    apps: [],
-    notes: '',
-    attachments: [],
-    subcourses: [
-      {id:'sk1', title:'Skin of Color Textbook', status:'notstarted', progress:0, done:false, url:''},
-      {id:'sk2', title:'Cosmetic Dermatology for Skin of Color', status:'notstarted', progress:0, done:false, url:''},
-      {id:'sk3', title:'Skin Revolution — Dr. Vanita Rattan', status:'notstarted', progress:0, done:false, url:''},
-      {id:'sk4', title:'Vampire Face Lift', status:'notstarted', progress:0, done:false, url:''},
-      {id:'sk5', title:"Aesthetic Procedures: Nurse Practitioner's Guide to Cosmetic Dermatology", status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
-  {
-    id: 'books-modern-transcend',
-    title: 'Modern Transcend Retreat — Reading List',
-    type: 'collection',
-    platform: 'Books',
-    icon: '🏔️',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Books', 'Modern Transcend', 'Retreat', 'Workbooks', 'Women'],
-    urls: [],
-    apps: [],
-    notes: 'Workbooks and resources for Modern Transcend retreat.',
-    attachments: [],
-    subcourses: [
-      {id:'mt1', title:'The Giving List: Women Doing it Differently', status:'notstarted', progress:0, done:false, url:''},
-    ]
-  },
+  }
 ];
 
+function makeBook(id, title, author, tags, notes='') {
+  return {
+    id, title,
+    type: 'book',
+    platform: author,
+    status: 'notstarted', progress: 0, done: false,
+    tags, urls: [], apps: ['Physical book'], notes, attachments: []
+  };
+}
+function makePodcast(id, title, host, url, tags, notes='') {
+  return {
+    id, title, type: 'podcast', platform: host,
+    status: 'notstarted', progress: 0, done: false,
+    tags, urls: [{label: 'Listen', url}], apps: ['Podcast app'], notes, attachments: []
+  };
+}
+function makeCourse(id, title, platform, url, tags, notes='') {
+  return {
+    id, title, type: 'course', platform,
+    status: 'notstarted', progress: 0, done: false,
+    tags, urls: url ? [{label: platform, url}] : [], apps: ['Behind login'], notes, attachments: []
+  };
+}
+
 const SEED_RESOURCES = [
+
+  // ── BOOKS: Hormones & Menopause ─────────────────────────────────────────
+  makeBook('b-estrogen-matters','Estrogen Matters','Avrum Bluming MD & Carol Tavris',['Hormones & Menopause','Women\'s Health','Clinical']),
+  makeBook('b-menopause-practice','Menopause Practice: A Clinician\'s Guide','NAMS',['Hormones & Menopause','Clinical','Reference']),
+  makeBook('b-you-are-not-broken','You Are Not Broken','Dr. Kelly Casperson MD',['Hormones & Menopause','Sexual Health','Women\'s Health']),
+  makeBook('b-age-healthier','Age Healthier, Live Happier','Mache Seibel MD',['Hormones & Menopause','Women\'s Health']),
+  makeBook('b-sheology','She-Ology & the She-quel','Sherry A. Ross MD',['Hormones & Menopause','Women\'s Health','Sexual Health']),
+  makeBook('b-come-as-you-are','Come As You Are','Emily Nagoski',['Hormones & Menopause','Sexual Health','Psychology']),
+  makeBook('b-good-news-estrogen','The Good News About Estrogen','Felice Gersh MD',['Hormones & Menopause','Clinical']),
+  makeBook('b-healthy-aging','How to Achieve Healthy Aging','Neal Rouzier MD',['Hormones & Menopause','Clinical','Longevity']),
+  makeBook('b-wisdom-meno','The Wisdom of Menopause','Christiane Northrup MD',['Hormones & Menopause','Women\'s Health']),
+  makeBook('b-goddesses-age','Goddesses Never Age','Christiane Northrup MD',['Hormones & Menopause','Women\'s Health','Mindset']),
+  makeBook('b-new-rules-meno','The New Rules of Menopause','Sharon Malone MD',['Hormones & Menopause','Clinical']),
+  makeBook('b-meno-solution','The Menopause Solution','Stephanie Faubion MD',['Hormones & Menopause','Clinical']),
+  makeBook('b-pcos','8 Steps to Reverse Your PCOS','Fiona McCulloch ND',['Hormones & Menopause','Women\'s Health','Clinical']),
+  makeBook('b-boundaries-hc','Boundaries','Dr. Henry Cloud & Dr. John Townsend',['Hormones & Menopause','Personal Development','Relationships']),
+  makeBook('b-ottava','The Ottava Method','',['Hormones & Menopause','Clinical']),
+  makeBook('b-longevity-nutrient','The Longevity Nutrient','Dr. Stephanie Venn-Watson',['Hormones & Menopause','Longevity','Nutrition']),
+
+  // ── BOOKS: Skin & Aesthetics ─────────────────────────────────────────────
+  makeBook('b-skin-of-color','Skin of Color: A Practical Guide','',['Skin & Aesthetics','Clinical','Reference']),
+  makeBook('b-cosm-derm','Cosmetic Dermatology for Skin of Color','',['Skin & Aesthetics','Clinical']),
+  makeBook('b-skin-revolution','Skin Revolution','Dr. Vanita Rattan',['Skin & Aesthetics','Clinical']),
+  makeBook('b-vampire-facelift','Vampire Facelift','Dr. Charles Runels',['Skin & Aesthetics','Aesthetics']),
+  makeBook('b-aesthetic-np','Aesthetic Procedures: Nurse Practitioner\'s Guide','',['Skin & Aesthetics','Clinical','Reference']),
+
+  // ── BOOKS: Health & Fitness ───────────────────────────────────────────────
+  makeBook('b-outlive','Outlive','Peter Attia MD',['Health & Fitness','Longevity','Clinical']),
+  makeBook('b-immune','Immune','Philipp Dettmer',['Health & Fitness','Clinical','Science']),
+  makeBook('b-deep-fitness','Deep Fitness','Mark Lard & Jim Farrell',['Health & Fitness','Exercise']),
+  makeBook('b-family-fit','The Family Fit Plan','Christine Palumbo RDN',['Health & Fitness','Nutrition','Parenting']),
+  makeBook('b-mindful-eater','How to Raise a Mindful Eater','Maryann Jacobsen MS RD',['Health & Fitness','Nutrition','Parenting']),
+  makeBook('b-younger-next-year','Younger Next Year','Chris Crowley & Henry Lodge MD',['Health & Fitness','Longevity']),
+
+  // ── BOOKS: Business & Self Development ───────────────────────────────────
+  makeBook('b-atomic-habits','Atomic Habits','James Clear',['Business','Personal Development','Productivity']),
+  makeBook('b-psych-of-money','The Psychology of Money','Morgan Housel',['Business','Finance','Personal Development']),
+  makeBook('b-lady-doc','Lady Doc Marketing','',['Business','Marketing','Medical Practice']),
+  makeBook('b-profit-first','Profit First','Mike Michalowicz',['Business','Finance','Medical Practice']),
+  makeBook('b-llc-guide','LLC Beginner\'s Guide','',['Business','Finance','Medical Practice']),
+  makeBook('b-fin-literacy','Financial Literacy for All','John Hope Bryant',['Business','Finance','Personal Development']),
+  makeBook('b-emyth','The E-Myth Physician','Michael Gerber & Michael Garnet MD',['Business','Medical Practice','Entrepreneurship']),
+  makeBook('b-storybrand','Building a StoryBrand','Donald Miller',['Business','Marketing','Branding']),
+  makeBook('b-mba','MBA Essentials','',['Business','Management']),
+  makeBook('b-entremd','EntreMD: How Physicians Can Build a Business','Dr. Nneka Unachukwu',['Business','Medical Practice','Entrepreneurship']),
+  makeBook('b-supercommunicators','Supercommunicators','Charles Duhigg',['Business','Communication','Personal Development']),
+  makeBook('b-dose-effect','The Dose Effect','TJ Power',['Business','Neuroscience','Personal Development']),
+
+  // ── BOOKS: Marriage & Relationships ──────────────────────────────────────
+  makeBook('b-essential-labor','Essential Labor','Angela Garbes',['Marriage & Relationships','Women\'s Health']),
+  makeBook('b-4-agreements','The Four Agreements','Don Miguel Ruiz',['Marriage & Relationships','Personal Development','Spirituality']),
+  makeBook('b-purpose-driven','The Purpose Driven Life','Rick Warren',['Marriage & Relationships','Faith','Personal Development']),
+  makeBook('b-working-mom','The Working Mom Blueprint','Whitney Casares MD',['Marriage & Relationships','Parenting','Business']),
+  makeBook('b-married-for-life','Married for Life','',['Marriage & Relationships']),
+  makeBook('b-everyday-feminist','The Everyday Feminist','',['Marriage & Relationships','Women\'s Health']),
+  makeBook('b-365-nights','365 Nights of Intimacy','',['Marriage & Relationships','Sexual Health']),
+  makeBook('b-a-to-z-marriage','A to Z of Marriage','',['Marriage & Relationships']),
+  makeBook('b-7-questions','7 Questions Wise Women Ask','',['Marriage & Relationships','Personal Development']),
+  makeBook('b-way-men-think','Manual: The Way Men Think','',['Marriage & Relationships']),
+  makeBook('b-marriage-challenges','Marriage Challenges','Williams',['Marriage & Relationships']),
+  makeBook('b-how-marriage-ends','This Is How Your Marriage Ends','Matthew Fray',['Marriage & Relationships']),
+  makeBook('b-7-principles','The Seven Principles for Making Marriage Work','John Gottman PhD',['Marriage & Relationships','Clinical']),
+  makeBook('b-couples-devo','Couples Devotional','',['Marriage & Relationships','Faith']),
+  makeBook('b-boundaries-marriage','Boundaries in Marriage','Dr. Henry Cloud & Dr. John Townsend',['Marriage & Relationships','Personal Development']),
+  makeBook('b-her','HER.','',['Marriage & Relationships','Women\'s Health']),
+  makeBook('b-art-seduction','The Art of Seduction','Robert Greene',['Marriage & Relationships']),
+  makeBook('b-loving-spouse','Loving Your Spouse When You Feel Like Walking Away','Gary Chapman',['Marriage & Relationships','Faith']),
+
+  // ── BOOKS: Parenting & Motherhood ────────────────────────────────────────
+  makeBook('b-how-we-love-kids','How We Love Our Kids','Milan & Kay Yerkovich',['Parenting','Psychology']),
+  makeBook('b-whos-new-kid','Who\'s the New Kid','',['Parenting']),
+  makeBook('b-yes-your-kid','Yes, Your Kid','',['Parenting']),
+  makeBook('b-talk-listen','How to Talk So Kids Will Listen & Listen So Kids Will Talk','Adele Faber & Elaine Mazlish',['Parenting']),
+  makeBook('b-power-moms','Power Moms','Joann Lublin',['Parenting','Business','Women\'s Health']),
+  makeBook('b-she-calls-daddy','She Calls Me Daddy','Robert Wolgemuth',['Parenting','Faith']),
+
+  // ── BOOKS: Mental Health ──────────────────────────────────────────────────
+  makeBook('b-how-not-kill','How Not to Kill Yourself','Clancy Martin',['Mental Health','Clinical']),
+  makeBook('b-help-depression','How to Help a Family Member Through Depression','',['Mental Health','Clinical']),
+  makeBook('b-loving-suicidal','Loving Someone with Suicidal Thoughts','Sarah Gaer-Sherwood',['Mental Health','Clinical']),
+
+  // ── BOOKS: Foreign Language & Learning ───────────────────────────────────
+  makeBook('b-french-convo','French Conversation Practice','',['Language Learning','French']),
+  makeBook('b-french-2000','2000 Most Common French Words in Context','',['Language Learning','French']),
+  makeBook('b-french-grammar','Complete French Grammar','Annie Heminway',['Language Learning','French']),
+  makeBook('b-chinese','Chinese Language Study','',['Language Learning','Chinese']),
+  makeBook('b-maybe-someday-fr','Maybe Someday (French Edition)','Colleen Hoover',['Language Learning','French','Fiction']),
+  makeBook('b-all-perfects-fr','All Your Perfects (French Edition)','Colleen Hoover',['Language Learning','French','Fiction']),
+  makeBook('b-cheat-french','How to Cheat at French Verbs','','[\'Language Learning\',\'French\']'),
+  makeBook('b-light-cannot-see-fr','All the Light We Cannot See (French Edition)','Anthony Doerr',['Language Learning','French','Fiction']),
+
+  // ── BOOKS: Faith ─────────────────────────────────────────────────────────
+  makeBook('b-women-bible','Women of the Bible Speak','Shannon Bream',['Faith','Personal Development']),
+
+  // ── BOOKS: Fiction & Poetry ───────────────────────────────────────────────
+  makeBook('b-last-thing','The Last Thing He Told Me','Laura Dave',['Fiction','Thriller']),
+  makeBook('b-im-judging','I\'m Judging You','Luvvie Ajayi Jones',['Fiction','Humor','Women\'s Health']),
+  makeBook('b-awkward-black','The Awkward Black Girl','Issa Rae',['Fiction','Memoir','Humor']),
+  makeBook('b-shtty-mom','Sh*tty Mom','Mary Ann Zoellner & Alicia Ybarbo',['Fiction','Humor','Parenting']),
+  makeBook('b-white-girl','White Girl Problems','Babe Walker',['Fiction','Humor']),
+  makeBook('b-call-us-carry','Call Us What We Carry (Poems)','Amanda Gorman',['Fiction','Poetry']),
+
+  // ── BOOKS: Miscellaneous ─────────────────────────────────────────────────
+  makeBook('b-read-inspiration','Read This for Inspiration','Alex Elle',['Miscellaneous','Personal Development']),
+  makeBook('b-am-history','American History in Bite-Sized Chunks','',['Miscellaneous']),
+  makeBook('b-hush','#Hush','',['Miscellaneous']),
+  makeBook('b-fatty','I\'m With Fatty','Edward Ugel',['Miscellaneous','Humor']),
+  makeBook('b-talk-race','So You Want to Talk About Race','Ijeoma Oluo',['Miscellaneous','Social Issues']),
+  makeBook('b-neruda','Love Poems','Pablo Neruda',['Miscellaneous','Poetry','Marriage & Relationships']),
+  makeBook('b-giving-list','The Giving List: Women Doing it Differently','',['Miscellaneous','Women\'s Health']),
+  makeBook('b-half-sky','Half the Sky: How to Change the World','Nicholas Kristof & Sheryl WuDunn',['Miscellaneous','Women\'s Health','Social Issues']),
+  makeBook('b-meaning-life','It\'s Okay Not to Look for the Meaning of Life','Jikisai Minami',['Miscellaneous','Personal Development','Philosophy']),
+  makeBook('b-paris-list','Books to Take to Paris (Reading List)','',['Miscellaneous','Fiction']),
+
+  // ── PODCASTS ─────────────────────────────────────────────────────────────
+  makePodcast('pod-the-drive','The Drive','Peter Attia MD','https://peterattiamd.com/podcast/',['Longevity','Health & Fitness','Clinical']),
+  makePodcast('pod-huberman','Huberman Lab','Andrew Huberman PhD','https://www.hubermanlab.com/podcast',['Neuroscience','Health & Fitness','Personal Development']),
+  makePodcast('pod-not-broken','You Are Not Broken','Dr. Kelly Casperson MD','https://kellycasperson.com/podcast',['Hormones & Menopause','Sexual Health','Women\'s Health']),
+  makePodcast('pod-entremd','Entre MD','Dr. Nneka Unachukwu','https://entremd.com/podcast/',['Business','Medical Practice','Entrepreneurship']),
+  makePodcast('pod-wealthy-mom','Wealthy Mom MD','Dr. Bonnie Koo MD','https://wealthymommd.com/podcast/',['Business','Finance','Personal Development']),
+  makePodcast('pod-meno-society','The Menopause Society Podcast','The Menopause Society','https://menopause.org/podcast',['Hormones & Menopause','Clinical']),
+  makePodcast('pod-wci','The White Coat Investor','Dr. Jim Dahle MD','https://www.whitecoatinvestor.com/podcast/',['Finance','Business','Personal Development']),
+  makePodcast('pod-gynflix','Gynflix Podcast','Gynflix',''  ,['Women\'s Health','Clinical','CME']),
+
+  // ── ONLINE LEARNING COURSES ───────────────────────────────────────────────
+  makeCourse('ol-nams-breast','NAMS Breast 101','NAMS','https://www.menopause.org/education',['Hormones & Menopause','Clinical','CME']),
+  makeCourse('ol-nams-meno','NAMS Menopause 101','NAMS','https://www.menopause.org/education',['Hormones & Menopause','Clinical','CME']),
+  makeCourse('ol-worldlink','Worldlink Medical Hormone Course','Worldlink Medical','https://www.worldlinkmedical.com',['Hormones & Menopause','Clinical','CME']),
+  makeCourse('ol-biote','Advanced Biote Training','Biote Medical','https://www.biote.com',['Hormones & Menopause','Clinical']),
+  makeCourse('ol-isswsh','ISSWSH Genitopelvic Pain Course','ISSWSH','https://www.isswsh.org',['Sexual Health','Women\'s Health','Clinical','CME']),
+  makeCourse('ol-ifm-hormone','IFM Free Hormone Course','Institute for Functional Medicine','https://www.ifm.org',['Hormones & Menopause','Clinical','Functional Medicine']),
+  makeCourse('ol-glucose-rev','Glucose Revolution Pro','Jessie Inchauspé','https://www.glucoserevolution.com',['Nutrition','Health & Fitness','Women\'s Health']),
+  makeCourse('ol-harvard-lifestyle','Harvard Lifestyle Medicine','Harvard Medical School','https://hms.harvard.edu',['Health & Fitness','Longevity','Clinical','CME']),
+  makeCourse('ol-ties-method','Menopause Masterclass — T.I.E.S. Method','',''  ,['Hormones & Menopause','Clinical']),
+  makeCourse('ol-gynflix','Gynflix 2.0','Gynflix','https://gynflix.com',['Women\'s Health','Clinical','CME']),
+  makeCourse('ol-skin-script','Skin Script Rx Training','Skin Script',''  ,['Skin & Aesthetics']),
+  makeCourse('ol-alumier','Alumier MD Certification','Alumier MD',''  ,['Skin & Aesthetics']),
+  makeCourse('ol-botox-fillers','Botox & Filler Fundamentals','',''  ,['Skin & Aesthetics','Clinical']),
+  makeCourse('ol-female-sexual','Female Sexual Medicine CME','',''  ,['Sexual Health','Clinical','CME']),
+  makeCourse('ol-acog','ACOG Continuous Learning','ACOG','https://www.acog.org/education',['Women\'s Health','Clinical','CME'],'Annual subscription'),
+  makeCourse('ol-physician-entrep','Physician Entrepreneurship Masterclass','',''  ,['Business','Medical Practice','Entrepreneurship']),
+  makeCourse('ol-medical-aesthetics','Medical Aesthetics Advanced Course','',''  ,['Skin & Aesthetics','Clinical']),
+
+  // ── WEBINARS / DIAGRAMS ───────────────────────────────────────────────────
   {
     id: 'sbh-diagrams',
     title: 'Science Becomes Her — Editable Skincare Diagrams',
     type: 'diagram',
     platform: 'Science Becomes Her / Kajabi',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Aesthetics', 'Skin', 'Marketing', 'Social Media'],
+    status: 'notstarted', progress: 0, done: false,
+    tags: ['Skin & Aesthetics','Marketing','Social Media'],
     urls: [{label: 'sciencebecomesher.mykajabi.com', url: 'https://sciencebecomesher.mykajabi.com/'}],
-    apps: ['Behind login'],
-    notes: '',
-    attachments: []
+    apps: ['Behind login'], notes: '', attachments: []
   },
   {
     id: 'obg-menopause-skin',
     title: 'OBG Project — Beyond the Surface: Skin in Menopause',
     type: 'webinar',
     platform: 'OBG Project',
-    status: 'notstarted',
-    progress: 0,
-    done: false,
-    tags: ['Menopause', 'Aesthetics', 'CME', 'Gynecology'],
-    urls: [{label: 'obgproject.com', url: 'https://www.obgproject.com/2026/05/05/beyond-the-surface-skin-in-menopause/'}],
-    apps: ['Paid access'],
-    notes: '',
-    attachments: []
+    status: 'notstarted', progress: 0, done: false,
+    tags: ['Hormones & Menopause','Skin & Aesthetics','CME'],
+    urls: [{label: 'obgproject.com', url: 'https://www.obgproject.com/'}],
+    apps: ['Paid access'], notes: '', attachments: []
   }
 ];
 
+
+function updateStatCards() {
+  const { collections, resources } = getData();
+  const all = [...collections, ...resources];
+  const active = all.filter(x => !x.done).length;
+  const inprog = all.filter(x => !x.done && x.status === 'inprogress').length;
+  const done   = all.filter(x => x.done).length;
+  const total  = all.length;
+  const pct    = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.getElementById('stat-active').textContent     = active;
+  document.getElementById('stat-inprogress').textContent = inprog;
+  document.getElementById('stat-done').textContent       = done;
+  document.getElementById('stat-pct').textContent        = pct + '%';
+}
 
 // ==================== STATE ====================
 let state = {
@@ -1592,6 +1437,9 @@ function filterItems(collections, resources) {
     } else if (f.value === 'reading') {
       filteredC = [];
       filteredR = filteredR.filter(r => !r.done && ['book','document'].includes(r.type));
+    } else if (f.value === 'collections') {
+      filteredC = filteredC.filter(c => !c.done);
+      filteredR = [];
     }
   } else if (f.type === 'type') {
     if (f.value === 'collection') {
@@ -1640,6 +1488,7 @@ function buildTagList() {
 function render() {
   updateBadges();
   buildTagList();
+  updateStatCards();
   const { collections, resources } = getData();
   const { filteredC, filteredR } = filterItems(collections, resources);
   const isArchive = state.filter.type === 'status' && state.filter.value === 'archive';
@@ -1693,7 +1542,8 @@ function render() {
 function typeBadge(type) {
   const map = {
     course: 'badge-course', webinar: 'badge-webinar', collection: 'badge-collection',
-    book: 'badge-book', video: 'badge-video', diagram: 'badge-diagram', document: 'badge-document'
+    book: 'badge-book', video: 'badge-video', diagram: 'badge-diagram', document: 'badge-document',
+    podcast: 'badge-podcast', website: 'badge-document'
   };
   const label = type.charAt(0).toUpperCase() + type.slice(1);
   return `<span class="type-badge ${map[type]||'badge-course'}">${label}</span>`;
