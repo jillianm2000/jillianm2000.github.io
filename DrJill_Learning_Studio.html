@@ -47,6 +47,11 @@ body {
   overflow: hidden;
 }
 
+.mobile-menu-btn,
+.mobile-sidebar-close,
+.mobile-sidebar-head,
+.sidebar-screen { display: none; }
+
 /* HEADER */
 .app-header {
   background: var(--navy);
@@ -802,6 +807,175 @@ input[type=range]::-webkit-slider-thumb {
 
 .help-link { font-size: 12px; color: var(--blush-deep); cursor: pointer; text-decoration: underline; }
 .help-link:hover { color: var(--blush-mid); }
+
+/* PHONE + TABLET OPTIMIZATION */
+@media (max-width: 900px) {
+  body { min-height: 100dvh; height: 100dvh; }
+  .app-header {
+    height: auto;
+    min-height: 112px;
+    padding: max(10px, env(safe-area-inset-top)) 12px 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "left actions" "search search";
+    gap: 10px;
+  }
+  .header-left { grid-area: left; min-width: 0; gap: 9px; }
+  .header-right { grid-area: actions; gap: 6px; }
+  .header-search { grid-area: search; width: 100%; }
+  .header-search input { width: 100%; height: 42px; font-size: 16px; }
+  .app-logo { font-size: 16px; overflow: hidden; text-overflow: ellipsis; }
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 10px;
+    background: rgba(255,255,255,.1);
+    color: white;
+    font: inherit;
+    font-size: 21px;
+    cursor: pointer;
+    flex: 0 0 42px;
+  }
+  .btn-gmail, .btn-add { height: 42px; padding: 0 12px; }
+  .gmail-label { display: none; }
+  .gmail-icon { font-size: 18px; }
+  .view-toggle { display: none; }
+  .btn-add { font-size: 0; width: 42px; padding: 0; }
+  .btn-add::after { content: "+"; font-size: 24px; line-height: 1; }
+
+  .app-body { position: relative; }
+  .sidebar {
+    position: fixed;
+    z-index: 1200;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(86vw, 340px);
+    padding: max(12px, env(safe-area-inset-top)) 0 max(20px, env(safe-area-inset-bottom));
+    border-right: 0;
+    box-shadow: 12px 0 36px rgba(27,42,78,.24);
+    transform: translateX(-105%);
+    transition: transform .24s ease;
+    overscroll-behavior: contain;
+  }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar-screen {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1190;
+    background: rgba(15,23,42,.48);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s, visibility .2s;
+  }
+  .sidebar-screen.open { opacity: 1; visibility: visible; }
+  .mobile-sidebar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 16px 14px 18px;
+    color: var(--navy);
+    border-bottom: 1px solid var(--blush);
+    margin-bottom: 8px;
+  }
+  .mobile-sidebar-close {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 10px;
+    background: var(--warm-grey-pale);
+    color: var(--navy);
+    font-size: 18px;
+  }
+  .sidebar-item { min-height: 46px; padding: 10px 18px; font-size: 14px; }
+  .sidebar-section-label { padding-top: 12px; }
+
+  .main-content {
+    width: 100%;
+    padding: 14px 12px calc(24px + env(safe-area-inset-bottom));
+  }
+  .stat-cards-row { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+  .stat-card { padding: 12px 8px; }
+  .stat-card-num { font-size: 23px; }
+  .stat-card-label { font-size: 10px; }
+  .cards-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
+  .card { padding: 14px; }
+  .card:hover { transform: none; }
+  .done-btn { width: 34px; height: 34px; }
+  .section-header { align-items: flex-start; gap: 8px; margin-bottom: 12px; }
+  .section-title { font-size: 18px; }
+  .section-subtitle { font-size: 12px; }
+  .search-banner { padding: 8px 12px; font-size: 12px; }
+
+  .list-card { align-items: flex-start; flex-wrap: wrap; padding: 12px; }
+  .list-card-right { width: 100%; padding-left: 46px; justify-content: space-between; }
+  .list-progress { flex: 1; max-width: 150px; }
+  .collection-header { padding: 14px 12px; }
+  .collection-header-left { gap: 9px; }
+  .collection-title { font-size: 14px; }
+  .collection-stats { display: none; }
+  .subcourse-row {
+    display: grid;
+    grid-template-columns: 38px 1fr auto;
+    gap: 7px;
+    padding: 11px 10px;
+    align-items: center;
+  }
+  .subcourse-title { grid-column: 2 / 4; }
+  .subcourse-progress { grid-column: 2 / 3; width: auto; }
+  .subcourse-status { grid-column: 2 / 3; }
+  .subcourse-link { grid-column: 3; grid-row: 3; min-height: 36px; display: flex; align-items: center; }
+
+  .detail-panel {
+    top: 0;
+    width: 100%;
+    padding-top: env(safe-area-inset-top);
+    border-left: 0;
+  }
+  .detail-header { padding: 16px; }
+  .detail-close { width: 42px; height: 42px; font-size: 20px; }
+  .detail-body { padding: 16px 16px calc(28px + env(safe-area-inset-bottom)); }
+  .notes-actions { flex-wrap: wrap; }
+  .notes-action-btn { min-height: 42px; }
+  .status-opt { min-height: 44px; font-size: 10px; }
+
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal {
+    width: 100%;
+    max-width: none;
+    max-height: 92dvh;
+    border-radius: 18px 18px 0 0;
+    margin: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .modal-header, .modal-body, .modal-footer { padding-left: 16px; padding-right: 16px; }
+  .modal-footer { position: sticky; bottom: 0; background: white; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .form-input, .form-select, .form-textarea { font-size: 16px; min-height: 44px; }
+  .btn-primary, .btn-secondary { min-height: 44px; }
+  .toast { bottom: calc(18px + env(safe-area-inset-bottom)); max-width: calc(100vw - 28px); }
+}
+
+@media (max-width: 420px) {
+  .app-logo .logo-sep { display: none; }
+  .app-logo { max-width: 175px; }
+  .btn-gmail { width: 40px; padding: 0; }
+  .btn-add { width: 40px; }
+  .header-right { gap: 5px; }
+  .stat-card-label { min-height: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .sidebar-screen, .detail-panel { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -809,6 +983,7 @@ input[type=range]::-webkit-slider-thumb {
 <!-- HEADER -->
 <header class="app-header">
   <div class="header-left">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="openMobileSidebar()" aria-label="Open filters" aria-expanded="false">☰</button>
     <div class="app-logo">Dr. Jill <span class="logo-sep"> | </span>Learning Studio</div>
     <div class="header-search">
       <span class="search-icon">🔍</span>
@@ -816,7 +991,7 @@ input[type=range]::-webkit-slider-thumb {
     </div>
   </div>
   <div class="header-right">
-    <button class="btn-gmail" onclick="openGmailModal()">📬 Process Education Inbox</button>
+    <button class="btn-gmail" onclick="openGmailModal()"><span class="gmail-icon">📬</span><span class="gmail-label">Process Education Inbox</span></button>
     <div class="view-toggle">
       <button class="view-btn active" id="gridBtn" onclick="setView('grid')" title="Grid view">⊞</button>
       <button class="view-btn" id="listBtn" onclick="setView('list')" title="List view">☰</button>
@@ -833,8 +1008,10 @@ input[type=range]::-webkit-slider-thumb {
 
 <!-- BODY -->
 <div class="app-body">
+  <div class="sidebar-screen" id="sidebarScreen" onclick="closeMobileSidebar()"></div>
   <!-- SIDEBAR -->
   <nav class="sidebar" id="sidebar">
+    <div class="mobile-sidebar-head"><strong>Browse Learning Studio</strong><button class="mobile-sidebar-close" onclick="closeMobileSidebar()" aria-label="Close filters">✕</button></div>
     <div class="sidebar-section">
       <div class="sidebar-section-label">Status</div>
       <div class="sidebar-item active" onclick="setFilter('status','all')" id="filter-all">
@@ -1073,7 +1250,7 @@ input[type=range]::-webkit-slider-thumb {
 
 <script>
 // ==================== DATA ====================
-const DATA_VERSION = '4';
+const DATA_VERSION = '3';
 
 const SEED_COLLECTIONS = [
   {
@@ -1224,7 +1401,7 @@ const SEED_RESOURCES = [
   makeBook('b-chinese','Chinese Language Study','',['Language Learning','Chinese']),
   makeBook('b-maybe-someday-fr','Maybe Someday (French Edition)','Colleen Hoover',['Language Learning','French','Fiction']),
   makeBook('b-all-perfects-fr','All Your Perfects (French Edition)','Colleen Hoover',['Language Learning','French','Fiction']),
-  makeBook('b-cheat-french','How to Cheat at French Verbs','',['Language Learning','French']),
+  makeBook('b-cheat-french','How to Cheat at French Verbs','','[\'Language Learning\',\'French\']'),
   makeBook('b-light-cannot-see-fr','All the Light We Cannot See (French Edition)','Anthony Doerr',['Language Learning','French','Fiction']),
 
   // ── BOOKS: Faith ─────────────────────────────────────────────────────────
@@ -1350,6 +1527,7 @@ function setFilter(type, value) {
   state.activeTagFilter = null;
   clearSearch(false);
   updateSidebarActive();
+  closeMobileSidebar();
   render();
 }
 function setTagFilter(tag) {
@@ -1357,8 +1535,37 @@ function setTagFilter(tag) {
   state.filter = { type: 'tag', value: tag };
   clearSearch(false);
   updateSidebarActive();
+  closeMobileSidebar();
   render();
 }
+
+// ==================== MOBILE NAVIGATION ====================
+function openMobileSidebar() {
+  if (window.innerWidth > 900) return;
+  const sidebar = document.getElementById('sidebar');
+  const screen = document.getElementById('sidebarScreen');
+  const button = document.getElementById('mobileMenuBtn');
+  sidebar.classList.add('mobile-open');
+  screen.classList.add('open');
+  button.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const screen = document.getElementById('sidebarScreen');
+  const button = document.getElementById('mobileMenuBtn');
+  if (!sidebar || !screen || !button) return;
+  sidebar.classList.remove('mobile-open');
+  screen.classList.remove('open');
+  button.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) closeMobileSidebar();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeMobileSidebar();
+});
 function handleSearch(val) {
   state.searchQuery = val.trim().toLowerCase();
   if (state.searchQuery) {
